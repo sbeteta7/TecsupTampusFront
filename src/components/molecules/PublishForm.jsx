@@ -10,23 +10,21 @@ import RangePublishForm from '../atoms/RangePublishForm';
 import FormImg from '../atoms/FormImg';
 import { Box } from '@mui/material';
 import userService from '../../services/userService';
-import { useAuth } from '../Context';
-
-
+import { useAuth } from '../Context/Context';
+import Typography from '@mui/material/Typography';
+import FormMap from './FormMap';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { LoadScriptProvider } from '../Context/MapContext/';
 
 function PublishForm() {
-
   const Auth = useAuth()
   const id_usuario = Auth.getUser().data.id_user
-  
   const [id_user,setId_user]=useState(id_usuario) 
   const [id_anuncio,setId_anuncio] = useState()
   const [titulo, setTitulo] = useState('');
-  const [imagenes, setImagenes] = useState([]);
   const [descripcion, setDescripcion] = useState('');
   const [ubicacion, setUbicacion] = useState('');
-  const [precio_min, setPrecioMin] = useState();
-  const [precio_max, setPrecioMax] = useState();
+  const [precio, setPrecio] = useState();
 
   const [tipo_espacio, setTipoEspacio] = useState('');
   const [num_hab, setNumHabitaciones] = useState();
@@ -34,14 +32,20 @@ function PublishForm() {
   const [dimensiones, setDimensiones] = useState();
   const [etiquetas, setEtiquetas] = useState([]);
   const [postEtiquetas,setPostEtiquetas]=useState([])
-  
-/* useEffect(()=>{
-  console.log("ESTE ES MI ID: "+ id_usuario)
-  userService.findUserById(id_usuario).then(response=>{
-    console.log("ESTE ES EL USUARIO: " + response.data)
-    //setId_user(response.data)
-  }).catch(error=>{})},[])
- */
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [postImages, setPostImages] = useState([]);
+
+   // Función de devolución de llamada para manejar cambios en la ubicación
+   const handleUbicacionChange = (nuevaUbicacion) => {
+    setUbicacion(nuevaUbicacion);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Puedes acceder a la ubicación desde aquí según sea necesario
+    console.log(ubicacion);
+    // Lógica de envío del formulario
+  };
 
 useEffect(()=>{
   EtiquetaServices.getAllEtiquetas().then(response =>{
@@ -53,55 +57,64 @@ useEffect(()=>{
 },[])
 
 
+
   const saveAnuncio = (e) => {
     e.preventDefault();
     
-     console.log("ID USUARIO : " + id_user)
-    const anuncio = {id_user,titulo,descripcion,precio_min,precio_max,tipo_espacio,num_hab,num_cama,dimensiones};
-   
-    console.log("La variable anuncio a procesar es :  "+anuncio)
+    const anuncio = {id_user,titulo,descripcion,ubicacion,precio,tipo_espacio,num_hab,num_cama,dimensiones};
     AnuncioServices.createAnuncio(anuncio)
   .then(response=>{
-    console.log("La respuestas procesada es: " + response.data)
     const id=response.data.id_anuncio
     setId_anuncio(id)
-    console.log("ID de anuncio = " + id + " TIPO DE DATO = " + typeof(response.data.id_anuncio))
-    
+
     const selectedEtiquetas = etiquetas.filter((etiqueta) => postEtiquetas.includes(etiqueta.id_etiqueta));
-    console.log("Selected Etiquetas es: " + selectedEtiquetas)
     setPostEtiquetas(selectedEtiquetas);
     associateEtiquetasWithAnuncio(id);
-    
+
     // Envía las imágenes al servidor
-
-
-/*     const imagenesData = imagenes.map((ruta) => ({ id_anuncio: id, ruta: ruta }));
-    console.log(imagenesData)
-    AnuncioServices.associateImagenes(imagenesData)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      }); */
+    const formData = new FormData();
+    for (const key of Object.keys(selectedImages)) {
+      formData.append('files', selectedImages[key].file);
+    }
     
+    console.log("FORM DATA: " + JSON.stringify(selectedImages))
 
-
-    console.log(id)
+    AnuncioServices.createImagen(formData).then((response) => {
+        console.log(response.data);
+        const id_imagenes = response.data.map(imagen => imagen.id)
+        setPostImages(response.data);
+    // Ahora que las imágenes se han creado, realiza la asociación con el anuncio
+        associateFilesWithAnuncio(id, id_imagenes);
+    }).catch(error => {
+        console.log(error);
+    });
   }).catch(error=>{
     console.log(error)
   })
-
-
 }
+
+const associateFilesWithAnuncio = (id_anuncio,id_imagenes) => {
+  //const id_files = postImages.map(file => file.id);
+  const requestBody = {
+    id_anuncio: id_anuncio,
+    id_files: id_imagenes,
+  };
+  console.log(requestBody)
+  AnuncioServices.associateImagenes(requestBody)
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
 const associateEtiquetasWithAnuncio = (id_anuncio) => {
   const id_etiquetas = postEtiquetas.map(etiqueta => etiqueta.id_etiqueta);
-  
   const requestBody = {
     id_anuncio: id_anuncio,
     id_etiquetas: id_etiquetas,
   };
-
   console.log(requestBody)
   AnuncioServices.associateEtiquetas(requestBody)
     .then(response => {
@@ -112,20 +125,9 @@ const associateEtiquetasWithAnuncio = (id_anuncio) => {
     });
 };
 
-
-const handleFileUpload = (e) => {
-  const files = e.target.files;
-  if (files && files.length > 0) {
-    const selectedImages = Array.from(files);
-    const imagePaths = selectedImages.map((image) => URL.createObjectURL(image));
-    setImagenes(imagePaths);
-  }
-};
-
 const handleEtiquetaChange = (etiquetaId, isChecked) => {
   // Copia el estado actual de postEtiquetas en una nueva variable
   const updatedPostEtiquetas = [...postEtiquetas];
-  
   if (isChecked) {
     // Si el checkbox se marca, agrega la etiqueta completa al array
     const etiqueta = etiquetas.find(etiqueta => etiqueta.id_etiqueta === etiquetaId);
@@ -139,7 +141,6 @@ const handleEtiquetaChange = (etiquetaId, isChecked) => {
       updatedPostEtiquetas.splice(index, 1);
     }
   }
-
   // Actualiza el estado postEtiquetas con la nueva variable
   setPostEtiquetas(updatedPostEtiquetas);
 };
@@ -151,10 +152,31 @@ const FormStyle={
   left:'10%'
 }
 
+const onFileChange = (event) => {
+  event.preventDefault();
+  const selectedFiles = event.target.files;
+  // Asegúrate de no exceder el límite de 5 imágenes
+  if (selectedFiles.length + selectedImages.length > 5) {
+    console.log("No puedes subir más de 5 imágenes");
+    return;
+  }
+
+  const newImages = Array.from(selectedFiles).map((file) => ({
+    id: Date.now(),
+    src: URL.createObjectURL(file),
+    file: file,
+  }));
+// Actualiza el estado selectedImages con todas las nuevas imágenes
+  setSelectedImages([...selectedImages, ...newImages]);
+};
+
 
     return(
+      
         <>
           <FormControl sx={FormStyle}>
+            <FormMap onUbicacionChange={handleUbicacionChange}/>
+            
             <Box >
             <Card variant="outlined" >
               <CardContent>
@@ -171,12 +193,58 @@ const FormStyle={
                       onChange={(e)=>setTitulo(e.target.value)}
                     />
                   </Box>
-                  <Box>
-                    <FormImg 
-                    onChange={handleFileUpload}
-                    
-                    />
-                  </Box>
+
+                  <div
+          style={{
+            overflowY: 'auto',
+            background: 'whitesmoke',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'flex-start', // Alinea las imágenes desde la parte superior
+            height: '300px', // Altura del área de carga
+            cursor: 'pointer',
+            border: '1px dashed', // Borde punteado para indicar área de carga
+            marginTop: '5px', // Espacio entre el área de carga y las imágenes
+        }} >
+        {selectedImages.map((image, index) => (
+          <img
+            key={image.id}
+            src={image.src}
+            alt={`Vista previa ${index + 1}`}
+            style={{
+              Width: '100%',
+              maxHeight: '150px', // Altura máxima de cada imagen
+              marginBottom: '5px', // Espacio entre imágenes
+              position: 'static', // Todas las imágenes son estáticas
+            }}
+          />
+        ))}
+      </div>
+      {selectedImages.length < 5 && (
+        <label htmlFor="image-input">
+          <div
+            style={{
+              background: 'whitesmoke',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '50px', // Altura del área de carga
+              cursor: 'pointer',
+              border: '1px dashed', // Borde punteado para indicar área de carga
+              marginTop: '5px', // Espacio entre el área de carga y las imágenes
+            }}
+          >
+            <input id='image-input' type="file" multiple onChange={onFileChange} />
+            <CloudUploadIcon />
+            <Typography variant="body2" color="text.secondary">
+              Seleccionar archivo
+            </Typography>
+          </div>
+        </label>
+      )}          
+
                   <TextField
                     id="outlined-basic"
                     label="Descripcion"
@@ -188,16 +256,11 @@ const FormStyle={
                     fullWidth
                     onChange={(e)=>setDescripcion(e.target.value)}
                   />
-             {/*    </Typography> */}
               </CardContent>
             </Card>
-
-
             </Box>
             <Box>
-              <p>Tipo de espacio</p>       
-                       
-       
+              <p>Tipo de espacio</p>           
               <RadioGroup
                   aria-label="custom-radio-group"
                   name="TipoEspacio"    
@@ -225,11 +288,10 @@ const FormStyle={
               <RangePublishForm/>
             </Box>
             <Box>
-              <p>Precio Min</p>
-              <NumberInputBasic name="PrecioMin"
-               onChange={(e)=> setPrecioMin(e.target.value)}/>
-              <p>Precio Max</p>
-              <NumberInputBasic name="PrecioMax" onChange={(e)=> setPrecioMax(e.target.value)}/>
+              <p>Precio</p>
+              <NumberInputBasic name="Precio"
+               onChange={(e)=> setPrecio(e.target.value)}/>
+
             </Box>
             <Box>
               <p>Dimensiones en m2</p>
@@ -273,6 +335,7 @@ const FormStyle={
                 variant='outlined'>
                 Publicar anuncio
               </LoadingButton>
+
               </Box>
         
           </FormControl>

@@ -1,0 +1,32 @@
+.custom-input-container {
+    position: relative;
+    margin-bottom: 1rem; /* Ajusta según sea necesario */
+  }
+
+  .custom-input {
+    --Input-radius: 0px;
+    border: none;
+    border-bottom: 2px solid #e0e0e0; /* Cambia según el color deseado o usa clases de Tailwind */
+    transition: border-color 0.15s cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+
+  .custom-input:hover {
+    border-color: #bdbdbd; /* Cambia según el color deseado o usa clases de Tailwind */
+  }
+
+  .custom-input::before {
+    content: '';
+    position: absolute;
+    border: 1px solid var(--Input-focusedHighlight);
+    transform: scaleX(0);
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    top: unset;
+    transition: transform 0.15s cubic-bezier(0.1, 0.9, 0.2, 1);
+    border-radius: 0;
+  }
+
+  .custom-input:focus-within::before {
+    transform: scaleX(1);
+  }

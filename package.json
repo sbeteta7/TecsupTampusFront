@@ -12,11 +12,14 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@googlemaps/react-wrapper": "^1.1.35",
     "@mui/base": "^5.0.0-beta.24",
     "@mui/icons-material": "^5.14.18",
+    "@mui/joy": "^5.0.0-beta.17",
     "@mui/lab": "^5.0.0-alpha.153",
     "@mui/material": "^5.14.17",
     "@mui/styled-engine-sc": "^6.0.0-alpha.5",
+    "@react-google-maps/api": "^2.19.2",
     "@react-oauth/google": "^0.12.1",
     "axios": "^1.6.2",
     "gapi-script": "^1.2.0",
@@ -29,7 +32,8 @@
     "react-social-login-buttons": "^3.9.1",
     "reactjs-social-login": "^2.6.3",
     "styled-components": "^6.1.1",
-    "tw-elements": "^1.0.0"
+    "tw-elements": "^1.0.0",
+    "use-places-autocomplete": "^4.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

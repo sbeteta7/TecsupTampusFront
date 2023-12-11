@@ -3,14 +3,14 @@ import Typography from '@mui/material/Typography';
 import Input from '@mui/material/Input';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
-function FormImg() {
+
+function FormImg(/* selectedImages, setSelectedImages */) {
   const [selectedImages, setSelectedImages] = useState([]);
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
-
     const reader = new FileReader();
     reader.onload = () => {
-      // Asegúrate de no exceder el límite de 5 imágenes
+      // Asegúrate de no exceder el límite d  e 5 imágenes
       if (selectedImages.length < 6) {
         setSelectedImages([...selectedImages, { id: Date.now(), src: reader.result }]);
       }
