@@ -11,6 +11,7 @@ import Ajustes from "./components/pages/Ajustes";
 import AnuncioInfo from "./components/pages/AnuncioInfo";
 import Publicar from "./components/pages/Publicar";
 import { LoadScriptProvider } from "./components/Context/MapContext";
+import RegisterPlus from "./components/pages/RegisterPlus";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/Ajustes" element={<Ajustes/>} />
           <Route path="/Mapa" element={<HomeMap/>} />
           <Route path="/AnuncioInfo" element={<AnuncioInfo/>} />
+          <Route path="/registerplus/*" element={<RegisterPlus />} />
         </Routes>
       </Router>
       </LoadScriptProvider>

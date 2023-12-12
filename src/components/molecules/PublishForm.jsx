@@ -87,7 +87,7 @@ useEffect(()=>{
         associateFilesWithAnuncio(id, id_imagenes);
     }).catch(error => {
         console.log(error);
-    });
+    }); 
   }).catch(error=>{
     console.log(error)
   })

@@ -7,7 +7,7 @@ import { setAuthToken } from '../../services/AuthenticateServices';
 import { useAuth } from '../Context/Context'
 import { useNavigate } from 'react-router-dom';
 
-const RegisterForm = () => {
+const   RegisterForm = () => {
     const Auth = useAuth()
     const navigate = useNavigate()
     const isLoggedIn = Auth.userIsAuthenticated() 
@@ -16,7 +16,10 @@ const RegisterForm = () => {
         lastName: '',
         email: '',
         password: '',
-        confirmPassword: '',
+       // confirmPassword: '',
+        fechaNacimiento:'',
+        telefono:'',
+  
     });
 
     //Evento para registrarse
@@ -104,6 +107,30 @@ const RegisterForm = () => {
                             </div>
 
                             <div className="relative mb-6">
+                                <p className="mb-3">Teléfono</p>
+                                <input
+                                    type="text"
+                                    name="telefono"
+                                    value={formData.telefono}
+                                    className="peer block min-h-[auto] w-full rounded bg-white px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100"
+                                    placeholder="Telefono"
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+
+                            <div className="relative mb-6">
+                                <p className="mb-3">Fecha de nacimiento</p>
+                                <input
+                                    type="date"
+                                    name="fechaNacimiento"
+                                    value={formData.fechaNacimiento}
+                                    className="peer block min-h-[auto] w-full rounded bg-white px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100"
+                                    placeholder="Fecha de nacimiento"
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+
+                            <div className="relative mb-6">
                                 <p className="mb-3">Password</p>
                                 <input
                                     type="password"
@@ -115,7 +142,7 @@ const RegisterForm = () => {
                                 />
                             </div>
 
-                            <div className="relative mb-6">
+                         {/*    <div className="relative mb-6">
                                 <p className="mb-3">Confirm Password</p>
                                 <input
                                     type="password"
@@ -125,7 +152,7 @@ const RegisterForm = () => {
                                     placeholder="Confirm Password"
                                     onChange={handleInputChange}
                                 />
-                            </div>
+                            </div> */}
 
                             <div className="mb-6 flex items-center justify-between">
                                 {/* Remember me checkbox */}

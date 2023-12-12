@@ -2,9 +2,18 @@ import AnuncioServices from "../../services/AnuncioServices";
 import { useState, useEffect } from "react";
 import AuthContext from "../Context/Context";
 import { useAuth } from "../Context/Context";
+import CardAnuncio from "../atoms/card";
+
+import EtiquetaService from "../../services/EtiquetaService";
+
+
+
 const Inicio04 = () => {
-      
-  const [anuncios,setAnuncios] = useState([])
+  const [anuncios, setAnuncios] = useState([]);
+  const [imagenesAnuncio, setImagenesAnuncio] = useState([]);
+  const [etiquetasAnuncio, setEtiquetasAnuncio] = useState({});
+  const [usuarioPropietario, setUsuarioPropietario] = useState({});
+  const [currentIndex, setCurrentIndex] = useState({});
   const { user } = useAuth();
  
   
@@ -15,13 +24,59 @@ const Inicio04 = () => {
       AnuncioServices.getAnuncioByUser(idUsuario)
         .then((response) => {
           setAnuncios(response.data);
-          console.log(response.data);
+          response.data.forEach((anuncio) => {
+            fetchEtiquetasByIdAnuncio(anuncio.id_anuncio);
+            fetchImagenesByIdAnuncio(anuncio.id_anuncio);
+            fetchPropietarioByIdAnuncio(anuncio.id_anuncio);
+            setCurrentIndex((prevState) => ({
+              ...prevState,
+              [anuncio.id_anuncio]: 0,
+            }));
+          });
         })
         .catch((error) => {
           console.log(error);
         });
     }
   }, [user]);
+
+  const fetchPropietarioByIdAnuncio = (id) => {
+    AnuncioServices.getUserByAnuncio(id)
+      .then((response) => {
+        setUsuarioPropietario((prevUsuarioPropietario) => {
+          return { ...prevUsuarioPropietario, [id]: response.data };
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const fetchEtiquetasByIdAnuncio = (id) => {
+    EtiquetaService.getByIdAnuncio(id)
+      .then((response) => {
+        setEtiquetasAnuncio((prevState) => ({ ...prevState, [id]: response.data }));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const fetchImagenesByIdAnuncio = (id) => {
+    AnuncioServices.getImagenesByIdAnuncio(id)
+      .then((response) => {
+        setImagenesAnuncio((prevState) =>
+          prevState.filter((item) => item.id_anuncio !== id)
+        );
+        setImagenesAnuncio((prevState) => [
+          ...prevState,
+          { id_anuncio: id, imagenes: response.data },
+        ]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   
 
 
@@ -33,18 +88,16 @@ const Inicio04 = () => {
             </div>
             <div className="flex flex-wrap -m-4">
             { anuncios.map((anuncio)=>(
-                
-                
-                    <div className="xl:w-1/4 md:w-1/2 p-4 w-full">
-                        <a className="block relative h-48 rounded overflow-hidden">
-                        <img alt="ecommerce" className="object-cover object-center w-full h-full block" src="https://dummyimage.com/420x260" />
-                        </a>
-                        <div className="mt-4">
-                        <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3>
-                        <h2 className="text-gray-900 title-font text-lg font-medium">{anuncio.titulo}</h2>
-                        <p className="mt-1">{anuncio.precio}</p> 
-                        </div>
-                    </div>
+                <CardAnuncio
+                key={anuncio.id_anuncio}
+                anuncio={anuncio}
+                imagenes={imagenesAnuncio
+                  .filter((imagen) => imagen.id_anuncio === anuncio.id_anuncio)
+                  .map((imagen) => imagen.imagenes)
+                  .flat()}
+                usuarioPropietario={usuarioPropietario[anuncio.id_anuncio]}
+                etiquetas={etiquetasAnuncio[anuncio.id_anuncio] || []}
+              />
                 
             ))
             }
