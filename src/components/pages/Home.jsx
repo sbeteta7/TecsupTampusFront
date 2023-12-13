@@ -2,7 +2,9 @@ import Header from "../organisms/Header";
 import HomeCP from "../organisms/HomeCP";
 import Footer from "../organisms/Footer";
 import HomeCP_02 from "../organisms/HomeCP_02";
-import { AuthProvider } from "../Context/Context";
+import Inicio00 from '../organisms/Inicio00'
+import Inicio01 from '../organisms/Inicio01'
+import Inicio02 from '../organisms/Inicio02'
 function Home() {
 
   return (
@@ -11,8 +13,9 @@ function Home() {
         
           <Header/>
           <HomeCP/>
-          <HomeCP_02/>
+          <Inicio01/>
           <Footer/>
+
         
       </div>
     </>

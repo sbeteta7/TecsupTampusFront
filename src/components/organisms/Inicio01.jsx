@@ -6,10 +6,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import CardAnuncio from "../atoms/card";
-
-
-
-
 const Inicio01 = () => {
   const [anuncios, setAnuncios] = useState([]);
   const [imagenesAnuncio, setImagenesAnuncio] = useState([]);
@@ -24,12 +20,12 @@ const Inicio01 = () => {
 
         // Al cargar los anuncios, también cargamos automáticamente las etiquetas e imágenes
         response.data.forEach((anuncio) => {
-          fetchEtiquetasByIdAnuncio(anuncio.id_anuncio);
-          fetchImagenesByIdAnuncio(anuncio.id_anuncio);
-          fetchPropietarioByIdAnuncio(anuncio.id_anuncio);
+          fetchEtiquetasByIdAnuncio(anuncio.idAnuncio);
+          fetchImagenesByIdAnuncio(anuncio.idAnuncio);
+          fetchPropietarioByIdAnuncio(anuncio.idAnuncio);
           setCurrentIndex((prevState) => ({
             ...prevState,
-            [anuncio.id_anuncio]: 0,
+            [anuncio.idAnuncio]: 0,
           }));
         });
       })
@@ -64,11 +60,11 @@ const Inicio01 = () => {
     AnuncioServices.getImagenesByIdAnuncio(id)
       .then((response) => {
         setImagenesAnuncio((prevState) =>
-          prevState.filter((item) => item.id_anuncio !== id)
+          prevState.filter((item) => item.idAnuncio !== id)
         );
         setImagenesAnuncio((prevState) => [
           ...prevState,
-          { id_anuncio: id, imagenes: response.data },
+          { idAnuncio: id, imagenes: response.data },
         ]);
       })
       .catch((error) => {
@@ -111,14 +107,14 @@ const Inicio01 = () => {
         <div className="flex flex-wrap">
           {anuncios.map((anuncio) => (
             <CardAnuncio
-              key={anuncio.id_anuncio}
+              key={anuncio.idAnuncio}
               anuncio={anuncio}
               imagenes={imagenesAnuncio
-                .filter((imagen) => imagen.id_anuncio === anuncio.id_anuncio)
+                .filter((imagen) => imagen.idAnuncio === anuncio.idAnuncio)
                 .map((imagen) => imagen.imagenes)
                 .flat()}
-              usuarioPropietario={usuarioPropietario[anuncio.id_anuncio]}
-              etiquetas={etiquetasAnuncio[anuncio.id_anuncio] || []}
+              usuarioPropietario={usuarioPropietario[anuncio.idAnuncio]}
+              etiquetas={etiquetasAnuncio[anuncio.idAnuncio] || []}
             />
           ))}
         </div>

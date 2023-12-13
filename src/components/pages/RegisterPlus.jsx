@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes, Outlet } from 'react-router-dom';
 import RegisterPlusBank from '../molecules/RegisterPlusBank';
-import RegisterPlusForm from '../molecules/RegisterPlusBank';
+import RegisterPlusForm from '../molecules/RegisterPlusForm';
 import RegisterPlusFinal from '../molecules/RegisterPlusFinal';
 import RegisterPlusComplete from '../molecules/RegisterPlusComplete';
 

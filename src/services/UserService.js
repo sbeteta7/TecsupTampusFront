@@ -19,7 +19,7 @@ class UserService {
       Authorization: `Bearer ${token}`,
     };
 
-    const url=USER_GET_BYID + toString({id})
+    const url = `${USER_GET_BYID}${id.toString()}`;
     
     return axios.get(url,{ headers });
   }

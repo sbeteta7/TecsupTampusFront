@@ -3,15 +3,15 @@ import habi from '../../img/habi.jpg';
 import InputPerfil from "../atoms/InputPerfil";
 import { FaPencil } from "react-icons/fa6";
 
-function CardPerfil() {
+function CardPerfil({nombre,apellido,telefono,fechaNacimiento,role}) {
 
     return (
         <>
 
 <div class="max-w-md  my-10 bg-white rounded-lg shadow-md p-5">
 <img src={habi} alt="" width={200}  class="w-60 h-60 rounded-full mx-auto"  />
-    <h2 class="text-center text-2xl font-semibold mt-1">John Doe</h2>
-    <p class="text-center text-gray-600 mt-1">Software Engineer</p>
+    <h2 class="text-center text-2xl font-semibold mt-1">{nombre} {apellido}</h2>
+    <p class="text-center text-gray-600 mt-1">{role}</p>
     <div class="flex justify-center ">
       <a href="#" class="text-blue-500 hover:text-blue-700 mx-3">Twitter</a>
       <a href="#" class="text-blue-500 hover:text-blue-700 mx-3">LinkedIn</a>
@@ -34,19 +34,19 @@ function CardPerfil() {
                             {/* Verifica si hay un usuario antes de mostrar la información */}
                         
             <div className="self-center w-9/12 my-5">
-                <InputPerfil type={"text"}  placeholder={"Nombres"}/>
+                <InputPerfil type={"text"}  placeholder={nombre} value={nombre}/>
                                     
             </div>
             <div className="self-center w-9/12 m-5">
-                <InputPerfil placeholder={"Apellidos"} className="" />
+                <InputPerfil placeholder={"Apellidos"} className="" value={apellido} />
             </div>
 
             <div className="self-center w-9/12 m-5">
-                <InputPerfil placeholder={"Telefono"} className="" />
+                <InputPerfil placeholder={"Telefono"} className="" value={telefono} />
             </div>
 
             <div className="self-center w-9/12 m-5">
-                <InputPerfil placeholder={"Fecha Nacimiento"} className="" />
+                <InputPerfil placeholder={"Fecha Nacimiento"} className=""  value={fechaNacimiento}/>
             </div>
 
         </div>    

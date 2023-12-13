@@ -44,20 +44,20 @@ const Header = () => {
                     to='/'>Home
                 </Link>
                 <Link className={`p-4 hover:text-purple-800 hover:bg-[#e0fff5] transition-colors duration-300 ${
-                    location.pathname === '/Navegar' ? 'bg-[#e0fff5] text-purple-800' : ''
+                    location.pathname === '/navegar' ? 'bg-[#e0fff5] text-purple-800' : ''
                     }`}
-                    to='/Navegar'>Navegar
+                    to='/navegar'>Navegar
                 </Link>
                 <Link className={`p-4 hover:text-purple-800 hover:bg-[#e0fff5] transition-colors duration-300 ${
                     location.pathname === '/Nosotros' ? 'bg-[#e0fff5] text-purple-800' : ''
                     }`}
-                    to='/Nosotros'>Nosotros
+                    to='/#'>Nosotros
                 </Link>
  
                 <Link className={`p-4 hover:text-purple-800 hover:bg-[#e0fff5] transition-colors duration-300 ${
-                    location.pathname === '/page3' ? 'bg-[#e0fff5] text-purple-800' : ''
+                    location.pathname === '/publicar' ? 'bg-[#e0fff5] text-purple-800' : ''
                     }`}
-                    to='/Publicar'>Publicar
+                    to='/publicar'>Publicar
                 </Link>
             </ul>
 
@@ -69,13 +69,11 @@ const Header = () => {
                 <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4'>TAMPUS</h1>
                 <ul className='uppercase p-4'>
                     <li className='p-4 hover:text-purple-800 border-b border-gray-400'><Link to='/'>Home</Link></li>
-                    <li className='p-4 hover:text-purple-800 border-b border-gray-400'><Link to='/Navegar'>Navegar</Link></li>
-                    <li className='p-4 hover:text-purple-800 border-b border-gray-400'>Nosotros</li>
-                    <li className='p-4 hover:text-purple-800 border-b border-gray-400'>Page3</li>
-                    <li className='p-4 hover:text-purple-800'>Page4</li>
+                    <li className='p-4 hover:text-purple-800 border-b border-gray-400'><Link to='/navegar'>Navegar</Link></li>
+                    {/* <li className='p-4 hover:text-purple-800 border-b border-gray-400'>Nosotros</li> */}
+                    <li className='p-4 hover:text-purple-800 border-b border-gray-400'><Link to='/publicar'>Publicar</Link></li>
                 </ul>
             </div>
-
             <div className='relative inline-block'>
 
                 {!isLoggedIn ? ( 
@@ -106,12 +104,15 @@ const Header = () => {
                 {showMenu && (
                     <div className='absolute bg-white p-4 shadow-md left-[-60px] z-10'>
                         <ul>
-                        <li className='p-2 border-b hover:text-purple-800 border-gray-400'><Link to='/Perfil'>Perfil</Link></li>
-                        <li className='p-2 border-b hover:text-purple-800 border-gray-400'><Link to='/Ajustes'>Ajustes</Link></li>
+                        <li className='p-2 border-b hover:text-purple-800 border-gray-400'><Link to='/cuenta'>Perfil</Link></li>
+                       {/*  <li className='p-2 border-b hover:text-purple-800 border-gray-400'><Link to='/Ajustes'>Ajustes</Link></li> */}
                     {isLoggedIn ? 
                         <li className='p-2 border-b hover:text-purple-800 border-gray-400'><Link to='/' onClick={handleLogOut} >Log out</Link></li>
                     :
-                        <li className='p-2 border-b hover:text-purple-800 border-gray-400'><Link to='/Login'>Login</Link></li>
+                        <>
+                        <li className='p-2 border-b hover:text-purple-800 border-gray-400'><Link to='/login'>Iniciar sesion</Link></li>
+                        <li className='p-2 border-b hover:text-purple-800 border-gray-400'><Link to='/register'>Registro</Link></li>
+                        </>
                     }   
                         </ul>
                     </div>

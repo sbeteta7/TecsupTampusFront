@@ -12,7 +12,7 @@ function RegisterPlusComplete() {
               Has completado el proceso de registro y ahora eres un arrendador. ¡Bienvenido a la comunidad!
             </p>
             <div className="flex justify-center">
-              <Link to="/profile">
+              <Link to="/Perfil">
                 <button
                   className="inline-block rounded bg-blue-500 px-7 py-2.5 text-sm font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-600 hover:shadow-md focus:shadow-md focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-md dark:shadow-xl dark:hover:shadow-md dark:focus:shadow-md dark:active:shadow-md"
                 >

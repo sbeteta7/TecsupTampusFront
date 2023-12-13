@@ -161,8 +161,12 @@ const   RegisterForm = () => {
                           
                                 <button
                                     type="submit"
-                                    className="inline-block w-full rounded bg-blue-500 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-600 hover:shadow-md focus:shadow-md focus:outline-none focus:ring-0 active:bg-blue-700 active:shadow-md dark:shadow-xl dark:hover:shadow-md dark:focus:shadow-md dark:active:shadow-md"
-                                    data-te-ripple-init
+                                    className="mb-10 inline-block w-full rounded bg-blue-500
+                                     px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal 
+                                     text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-600 
+                                     hover:shadow-md focus:shadow-md focus:outline-none focus:ring-0 active:bg-blue-700 
+                                     active:shadow-md dark:shadow-xl dark:hover:shadow-md dark:focus:shadow-md dark:active:shadow-md"                                    data-te-ripple-init
+                                    
                                     data-te-ripple-color="light"
                                 >
                                     Register

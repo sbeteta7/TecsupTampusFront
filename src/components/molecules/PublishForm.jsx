@@ -19,16 +19,17 @@ import { LoadScriptProvider } from '../Context/MapContext/';
 function PublishForm() {
   const Auth = useAuth()
   const id_usuario = Auth.getUser().data.id_user
-  const [id_user,setId_user]=useState(id_usuario) 
-  const [id_anuncio,setId_anuncio] = useState()
+  const [idUser,setIdUser]=useState(id_usuario) 
+
+  const [idAnuncio,setIdAnuncio] = useState()
   const [titulo, setTitulo] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [ubicacion, setUbicacion] = useState('');
   const [precio, setPrecio] = useState();
 
-  const [tipo_espacio, setTipoEspacio] = useState('');
-  const [num_hab, setNumHabitaciones] = useState();
-  const [num_cama, setNumCamas] = useState();
+  const [tipoEspacio, setTipoEspacio] = useState('');
+  const [numHab, setNumHabitaciones] = useState();
+  const [numCama, setNumCamas] = useState();
   const [dimensiones, setDimensiones] = useState();
   const [etiquetas, setEtiquetas] = useState([]);
   const [postEtiquetas,setPostEtiquetas]=useState([])
@@ -48,6 +49,7 @@ function PublishForm() {
   };
 
 useEffect(()=>{
+
   EtiquetaServices.getAllEtiquetas().then(response =>{
     setEtiquetas(response.data);
 
@@ -61,13 +63,13 @@ useEffect(()=>{
   const saveAnuncio = (e) => {
     e.preventDefault();
     
-    const anuncio = {id_user,titulo,descripcion,ubicacion,precio,tipo_espacio,num_hab,num_cama,dimensiones};
+    const anuncio = {idUser,titulo,descripcion,ubicacion,precio,tipoEspacio,numHab,numCama,dimensiones};
     AnuncioServices.createAnuncio(anuncio)
   .then(response=>{
-    const id=response.data.id_anuncio
-    setId_anuncio(id)
+    const id=response.data.idAnuncio
+    setIdAnuncio(id)
 
-    const selectedEtiquetas = etiquetas.filter((etiqueta) => postEtiquetas.includes(etiqueta.id_etiqueta));
+    const selectedEtiquetas = etiquetas.filter((etiqueta) => postEtiquetas.includes(etiqueta.idEtiqueta));
     setPostEtiquetas(selectedEtiquetas);
     associateEtiquetasWithAnuncio(id);
 
@@ -93,11 +95,11 @@ useEffect(()=>{
   })
 }
 
-const associateFilesWithAnuncio = (id_anuncio,id_imagenes) => {
+const associateFilesWithAnuncio = (idAnuncio,id_imagenes) => {
   //const id_files = postImages.map(file => file.id);
   const requestBody = {
-    id_anuncio: id_anuncio,
-    id_files: id_imagenes,
+    idAnuncio: idAnuncio,
+    idFiles: id_imagenes,
   };
   console.log(requestBody)
   AnuncioServices.associateImagenes(requestBody)
@@ -109,11 +111,11 @@ const associateFilesWithAnuncio = (id_anuncio,id_imagenes) => {
     });
 };
 
-const associateEtiquetasWithAnuncio = (id_anuncio) => {
-  const id_etiquetas = postEtiquetas.map(etiqueta => etiqueta.id_etiqueta);
+const associateEtiquetasWithAnuncio = (idAnuncio) => {
+  const id_etiquetas = postEtiquetas.map(etiqueta => etiqueta.idEtiqueta);
   const requestBody = {
-    id_anuncio: id_anuncio,
-    id_etiquetas: id_etiquetas,
+    idAnuncio: idAnuncio,
+    idEtiquetas: id_etiquetas,
   };
   console.log(requestBody)
   AnuncioServices.associateEtiquetas(requestBody)
@@ -284,9 +286,9 @@ const onFileChange = (event) => {
                 </div>
               </RadioGroup>
             </Box>
-            <Box>
+{/*             <Box>
               <RangePublishForm/>
-            </Box>
+            </Box> */}
             <Box>
               <p>Precio</p>
               <NumberInputBasic name="Precio"

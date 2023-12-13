@@ -12,7 +12,7 @@ import AnuncioInfo from "./components/pages/AnuncioInfo";
 import Publicar from "./components/pages/Publicar";
 import { LoadScriptProvider } from "./components/Context/MapContext";
 import RegisterPlus from "./components/pages/RegisterPlus";
-
+import Reservas from "./components/pages/Reservas";
 function App() {
   return (
     <div className="">
@@ -23,16 +23,17 @@ function App() {
       <Router>
          <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Navegar" element={<Navegar />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Register" element={<Register />} />
-          <Route path="/Publicar" element={<MisAnuncios/>} />
-          <Route path="/Publicar/Form" element={<Publicar/>} />
-          <Route path="/Perfil" element={<Perfil/>} />
-          <Route path="/Ajustes" element={<Ajustes/>} />
-          <Route path="/Mapa" element={<HomeMap/>} />
-          <Route path="/AnuncioInfo" element={<AnuncioInfo/>} />
+          <Route path="/navegar" element={<Navegar />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/publicar" element={<MisAnuncios/>} />
+          <Route path="/publicar/form" element={<Publicar/>} />
+          <Route path="/cuenta" element={<Perfil/>} />
+          <Route path="/cuenta" element={<Ajustes/>} />
+          <Route path="/mapa" element={<HomeMap/>} />
+          <Route path="/anuncio" element={<AnuncioInfo/>} />
           <Route path="/registerplus/*" element={<RegisterPlus />} />
+          <Route path="/reserva" element={<Reservas/>} />
         </Routes>
       </Router>
       </LoadScriptProvider>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../organisms/Header";
 import QuiltedImageList from "./Imagenes";
+import Reser_IMG from "../molecules/Reser_IMG";
 function AnuncioInfo() {
 
     return (
@@ -10,13 +11,14 @@ function AnuncioInfo() {
             <div className="w-10/12 m-5 mx-auto ">
                 {/* IMAGENES */}
                 <div className="w-full">
-                <div className=" h-96 border-2 border-indigo-500/100">
-                    <QuiltedImageList />
+                <div className="my-5 ">
+                    <Reser_IMG />
                 </div>
                 </div>
 
 
                 {/* CONTENIDO */}
+        
                 <div className="relative">
                 <div class="absolute top-20 right-0 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             <div class="flex justify-end px-4 pt-4">
@@ -42,7 +44,7 @@ function AnuncioInfo() {
                     {/* TITULO Y SIMBOLO DE FAVORITO */}
                     <div className="flex justify-between">
                         <div>
-                            <h1>CUARTO PARA ESTUDIANTE TECSUP</h1>
+                        <p className='text-left text-gray-700 text-[40px] font-semibold py-4'>Cuarto para joven solo, estudiante</p>
                         </div>
 
                         <div>
@@ -55,7 +57,7 @@ function AnuncioInfo() {
                         <div className="my-5">
                             {/* UBICACION */}
                             <div className="my-1">
-                                <p>Santa Anita, Lima</p>
+                                <p className='text-[20px]'>Santa Anita, Lima</p>
                             </div>
                             {/* ETIQUETAS */}
                             <div className="my-1">
