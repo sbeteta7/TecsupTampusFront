@@ -23,7 +23,7 @@ const HomeCP = () => {
                     {text}
                 </span>
                 <span className='text- black'>
-                    <Cursor cursorStyle='<' />
+                    <Cursor cursorStyle='|' />
                 </span>
                 </p>
 

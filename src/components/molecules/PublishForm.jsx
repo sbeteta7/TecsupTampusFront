@@ -176,171 +176,173 @@ const onFileChange = (event) => {
     return(
       
         <>
-          <FormControl sx={FormStyle}>
-            <FormMap onUbicacionChange={handleUbicacionChange}/>
-            
-            <Box >
-            <Card variant="outlined" >
-              <CardContent>
-                {/* <Typography variant="body2" color="text.secondary"> */}
-                  <Box my={2}>
-                    <TextField 
-                      id="standard-basic"
-                      label="Titulo"
-                      variant="standard"
-                      type="text"
-                      name="titulo"
-                      value={titulo}
-                      fullWidth
-                      onChange={(e)=>setTitulo(e.target.value)}
-                    />
-                  </Box>
+          <div className='my-8'>
+            <FormControl sx={FormStyle}>
+              <FormMap onUbicacionChange={handleUbicacionChange}/>
+              
+              <Box >
+              <Card variant="outlined" >
+                <CardContent>
+                  {/* <Typography variant="body2" color="text.secondary"> */}
+                    <Box my={2}>
+                      <TextField 
+                        id="standard-basic"
+                        label="Titulo"
+                        variant="standard"
+                        type="text"
+                        name="titulo"
+                        value={titulo}
+                        fullWidth
+                        onChange={(e)=>setTitulo(e.target.value)}
+                      />
+                    </Box>
 
-                  <div
-          style={{
-            overflowY: 'auto',
-            background: 'whitesmoke',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'flex-start', // Alinea las imágenes desde la parte superior
-            height: '300px', // Altura del área de carga
-            cursor: 'pointer',
-            border: '1px dashed', // Borde punteado para indicar área de carga
-            marginTop: '5px', // Espacio entre el área de carga y las imágenes
-        }} >
-        {selectedImages.map((image, index) => (
-          <img
-            key={image.id}
-            src={image.src}
-            alt={`Vista previa ${index + 1}`}
+                    <div
             style={{
-              Width: '100%',
-              maxHeight: '150px', // Altura máxima de cada imagen
-              marginBottom: '5px', // Espacio entre imágenes
-              position: 'static', // Todas las imágenes son estáticas
-            }}
-          />
-        ))}
-      </div>
-      {selectedImages.length < 5 && (
-        <label htmlFor="image-input">
-          <div
-            style={{
+              overflowY: 'auto',
               background: 'whitesmoke',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              justifyContent: 'center',
-              height: '50px', // Altura del área de carga
+              justifyContent: 'flex-start', // Alinea las imágenes desde la parte superior
+              height: '300px', // Altura del área de carga
               cursor: 'pointer',
               border: '1px dashed', // Borde punteado para indicar área de carga
               marginTop: '5px', // Espacio entre el área de carga y las imágenes
-            }}
-          >
-            <input id='image-input' type="file" multiple onChange={onFileChange} />
-            <CloudUploadIcon />
-            <Typography variant="body2" color="text.secondary">
-              Seleccionar archivo
-            </Typography>
-          </div>
-        </label>
-      )}          
+          }} >
+          {selectedImages.map((image, index) => (
+            <img
+              key={image.id}
+              src={image.src}
+              alt={`Vista previa ${index + 1}`}
+              style={{
+                Width: '100%',
+                maxHeight: '150px', // Altura máxima de cada imagen
+                marginBottom: '5px', // Espacio entre imágenes
+                position: 'static', // Todas las imágenes son estáticas
+              }}
+            />
+          ))}
+        </div>
+        {selectedImages.length < 5 && (
+          <label htmlFor="image-input">
+            <div
+              style={{
+                background: 'whitesmoke',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '50px', // Altura del área de carga
+                cursor: 'pointer',
+                border: '1px dashed', // Borde punteado para indicar área de carga
+                marginTop: '5px', // Espacio entre el área de carga y las imágenes
+              }}
+            >
+              <input id='image-input' type="file" multiple onChange={onFileChange} />
+              <CloudUploadIcon />
+              <Typography variant="body2" color="text.secondary">
+                Seleccionar archivo
+              </Typography>
+            </div>
+          </label>
+        )}          
 
-                  <TextField
-                    id="outlined-basic"
-                    label="Descripcion"
-                    variant="outlined"
-                    name="descripcion"
-                    value={descripcion}
-                    multiline  // Permite múltiples líneas
-                    rows={4}    // Ajusta la altura según tus necesidades
-                    fullWidth
-                    onChange={(e)=>setDescripcion(e.target.value)}
-                  />
-              </CardContent>
-            </Card>
-            </Box>
-            <Box>
-              <p>Tipo de espacio</p>           
-              <RadioGroup
-                  aria-label="custom-radio-group"
-                  name="TipoEspacio"    
-                >
-                <div>
-                  <input type="radio" id="habitacion" name="TipoEspacio" value="Habitación"
-                    onChange={(e)=> setTipoEspacio(e.target.value)}  />
-                  <label htmlFor="habitacion">Habitación</label>
-                </div>
+                    <TextField
+                      id="outlined-basic"
+                      label="Descripcion"
+                      variant="outlined"
+                      name="descripcion"
+                      value={descripcion}
+                      multiline  // Permite múltiples líneas
+                      rows={4}    // Ajusta la altura según tus necesidades
+                      fullWidth
+                      onChange={(e)=>setDescripcion(e.target.value)}
+                    />
+                </CardContent>
+              </Card>
+              </Box>
+              <Box>
+                <p>Tipo de espacio</p>           
+                <RadioGroup
+                    aria-label="custom-radio-group"
+                    name="TipoEspacio"    
+                  >
+                  <div>
+                    <input type="radio" id="habitacion" name="TipoEspacio" value="Habitación"
+                      onChange={(e)=> setTipoEspacio(e.target.value)}  />
+                    <label htmlFor="habitacion">Habitación</label>
+                  </div>
 
-                <div>
-                  <input type="radio" id="departamento" name="TipoEspacio" value="Departamento" 
-                    onChange={(e)=> setTipoEspacio(e.target.value)}/>
-                  <label htmlFor="departamento">Departamento</label>
-                </div>
+                  <div>
+                    <input type="radio" id="departamento" name="TipoEspacio" value="Departamento" 
+                      onChange={(e)=> setTipoEspacio(e.target.value)}/>
+                    <label htmlFor="departamento">Departamento</label>
+                  </div>
 
-                <div>
-                  <input type="radio" id="casa" name="TipoEspacio" value="Casa" 
-                    onChange={(e)=> setTipoEspacio(e.target.value)}/>
-                  <label htmlFor="casa">Casa</label>
-                </div>
-              </RadioGroup>
-            </Box>
-{/*             <Box>
-              <RangePublishForm/>
-            </Box> */}
-            <Box>
-              <p>Precio</p>
-              <NumberInputBasic name="Precio"
-               onChange={(e)=> setPrecio(e.target.value)}/>
-
-            </Box>
-            <Box>
-              <p>Dimensiones en m2</p>
-              <NumberInputBasic name="Dimension" onChange={(e)=> setDimensiones(e.target.value)}/>
-            </Box>
-            <Box>
-              <p>Numero de habitaciones</p>
-              <MinimumNumberInput name="NumHabitacion" onChange={(e)=> setNumHabitaciones(e.target.value)}/>
-            </Box>
-            <Box>
-              <p>Numero de camas</p>
-              <MinimumNumberInput name="NumCamas" onChange={(e)=> setNumCamas(e.target.value)} />
-            </Box>
-
-            <Box>
-          {etiquetas.map((etiqueta) => (
-            
-            
-              <div key={etiqueta.id_etiqueta}>
-                <FormGroup>
-                <FormControlLabel control={<Checkbox
-                value={etiqueta.id_etiqueta}
-                onChange={(e) =>
-                  handleEtiquetaChange(
-                    etiqueta.id_etiqueta,
-                    e.target.checked // Verifica si el checkbox se marca o desmarca
-                  )
-                }
-                />} label={etiqueta.nombre} />
-              </FormGroup>
-                
-                <br />
-              </div>
-            ))}  
-            </Box>          
-            <Box>
-            
-               <LoadingButton 
-                onClick={(e) => saveAnuncio(e)}
-                size='small'
-                variant='outlined'>
-                Publicar anuncio
-              </LoadingButton>
+                  <div>
+                    <input type="radio" id="casa" name="TipoEspacio" value="Casa" 
+                      onChange={(e)=> setTipoEspacio(e.target.value)}/>
+                    <label htmlFor="casa">Casa</label>
+                  </div>
+                </RadioGroup>
+              </Box>
+  {/*             <Box>
+                <RangePublishForm/>
+              </Box> */}
+              <Box>
+                <p>Precio</p>
+                <NumberInputBasic name="Precio"
+                onChange={(e)=> setPrecio(e.target.value)}/>
 
               </Box>
-        
-          </FormControl>
+              <Box>
+                <p>Dimensiones en m2</p>
+                <NumberInputBasic name="Dimension" onChange={(e)=> setDimensiones(e.target.value)}/>
+              </Box>
+              <Box>
+                <p>Numero de habitaciones</p>
+                <MinimumNumberInput name="NumHabitacion" onChange={(e)=> setNumHabitaciones(e.target.value)}/>
+              </Box>
+              <Box>
+                <p>Numero de camas</p>
+                <MinimumNumberInput name="NumCamas" onChange={(e)=> setNumCamas(e.target.value)} />
+              </Box>
+
+              <Box>
+            {etiquetas.map((etiqueta) => (
+              
+              
+                <div key={etiqueta.id_etiqueta}>
+                  <FormGroup>
+                  <FormControlLabel control={<Checkbox
+                  value={etiqueta.id_etiqueta}
+                  onChange={(e) =>
+                    handleEtiquetaChange(
+                      etiqueta.id_etiqueta,
+                      e.target.checked // Verifica si el checkbox se marca o desmarca
+                    )
+                  }
+                  />} label={etiqueta.nombre} />
+                </FormGroup>
+                  
+                  <br />
+                </div>
+              ))}  
+              </Box>          
+              <Box>
+              
+                <LoadingButton 
+                  onClick={(e) => saveAnuncio(e)}
+                  size='small'
+                  variant='outlined'>
+                  Publicar anuncio
+                </LoadingButton>
+
+                </Box>
+          
+            </FormControl>
+          </div>
         </>
     )
 }
