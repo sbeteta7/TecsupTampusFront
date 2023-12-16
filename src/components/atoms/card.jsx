@@ -16,8 +16,8 @@ const CardAnuncio = ({ anuncio, imagenes, usuarioPropietario, etiquetas }) => {
     };
   
     return (
-      <div className="xl:w-1/4 sm:w-1/2 w-full p-2  hover:scale-105 duration-300">
-        <div className="bg-gray-100 rounded-lg">
+      <div className="xl:w-1/4 sm:w-1/2 w-full p-2  hover:scale-105 duration-300 ">
+        <div className="bg-gray-100 rounded-lg shadow-md m-3">
           <Slider {...sliderSettings}>
             {imagenes.map((imagen, index) => (
               <div className="carousel-item" key={index}>
@@ -30,21 +30,21 @@ const CardAnuncio = ({ anuncio, imagenes, usuarioPropietario, etiquetas }) => {
             ))}
           </Slider>
   
-          <div className="">
-            <div>
-              <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">
-                Ofrecido por: {usuarioPropietario}
-              </h3>
-            </div>
+          <div className="mt-5 mx-3 pb-3">
             <h2 className="text-md text-gray-900 font-medium title-font">
               {anuncio.titulo} {anuncio.id_anuncio}
             </h2>
-            <p className="text-md text-gray-900">{anuncio.ubicacion}</p>
+            <div>
+              <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font mt-1">
+                Ofrecido por: {usuarioPropietario}
+              </h3>
+            </div>
+            <p className="text-md text-gray-900 mt-1">{anuncio.ubicacion}</p>
             <p className="leading-relaxed text-base">$/ {anuncio.precio}</p>
             <div className="flex flex-wrap">
               {etiquetas.map((etiqueta) => (
                 <div
-                  className="border-2 border-indigo-400 mx-2 mt-1 px-1 rounded-lg"
+                  className="border-2 border-indigo-400 mr-3 mt-2 px-1 rounded-lg"
                   key={etiqueta.id_etiqueta}
                 >
                   {etiqueta.nombre}

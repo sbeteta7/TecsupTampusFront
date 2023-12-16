@@ -96,11 +96,10 @@ const Inicio01 = () => {
             </h1>
             <div className="h-1 w-20 bg-indigo-500 rounded"></div>
           </div>
-          <p className="lg:w-1/2 w-full leading-relaxed text-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis maiores
-            recusandae dicta quas minus expedita natus rerum dolorem nisi maxime
-            molestias qui, dignissimos reprehenderit amet magnam sit blanditiis veniam
-            voluptate.
+          <p className="lg:w-1/2 w-full leading-relaxed text-gray-500 text-[20px]">
+          "En cada paso de tu camino, estamos aquí para ofrecerte apoyo y soluciones. 
+          Nuestra dedicación es mantenerte cerca, proporcionando servicios que se adaptan 
+          a tus necesidades, porque tu comodidad y satisfacción son nuestra prioridad."
           </p>
         </div>
 
