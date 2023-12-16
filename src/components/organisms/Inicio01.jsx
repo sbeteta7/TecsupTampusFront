@@ -4,6 +4,7 @@ import EtiquetaService from "../../services/EtiquetaService";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useNavigate } from "react-router-dom";
 
 import CardAnuncio from "../atoms/card";
 const Inicio01 = () => {
@@ -86,6 +87,14 @@ const Inicio01 = () => {
     }));
   };
 
+  const navigate = useNavigate();
+
+  const handleAnuncio = (idAnuncio) => {
+      navigate(`/anuncio/${idAnuncio}`);
+      console.log("click en el anuncio $idAnuncio");
+
+  } 
+
   return (
     <section className="text-gray-600 body-font flex">
       <div className="container px-5 py-24 mx-auto">
@@ -105,8 +114,12 @@ const Inicio01 = () => {
 
         <div className="flex flex-wrap">
           {anuncios.map((anuncio) => (
+              <div className="xl:w-1/4 sm:w-1/2 w-full p-2  hover:scale-105 duration-300">
+              <div className="bg-gray-100 rounded-lg" onClick={() => handleAnuncio(anuncio.idAnuncio)}>   
             <CardAnuncio
+              
               key={anuncio.idAnuncio}
+              onclick
               anuncio={anuncio}
               imagenes={imagenesAnuncio
                 .filter((imagen) => imagen.idAnuncio === anuncio.idAnuncio)
@@ -115,6 +128,8 @@ const Inicio01 = () => {
               usuarioPropietario={usuarioPropietario[anuncio.idAnuncio]}
               etiquetas={etiquetasAnuncio[anuncio.idAnuncio] || []}
             />
+           </div>
+           </div>
           ))}
         </div>
       </div>

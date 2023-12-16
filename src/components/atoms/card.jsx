@@ -16,11 +16,11 @@ const CardAnuncio = ({ anuncio, imagenes, usuarioPropietario, etiquetas }) => {
     };
   
     return (
-      <div className="xl:w-1/4 sm:w-1/2 w-full p-2  hover:scale-105 duration-300 ">
-        <div className="bg-gray-100 rounded-lg shadow-md m-3">
+      <>
+        <div className='shadow-md rounded-lg my-2'>
           <Slider {...sliderSettings}>
             {imagenes.map((imagen, index) => (
-              <div className="carousel-item" key={index}>
+              <div className="carousel-item cursor-pointer" key={index}>
                 <img
                   className="h-48 w-full object-cover object-center rounded-lg"
                   src={imagen.fileUri}
@@ -31,7 +31,7 @@ const CardAnuncio = ({ anuncio, imagenes, usuarioPropietario, etiquetas }) => {
           </Slider>
   
           <div className="mt-5 mx-3 pb-3">
-            <h2 className="text-md text-gray-900 font-medium title-font">
+            <h2 className="cursor-pointer text-md text-gray-900 font-medium title-font">
               {anuncio.titulo} {anuncio.id_anuncio}
             </h2>
             <div>
@@ -53,7 +53,7 @@ const CardAnuncio = ({ anuncio, imagenes, usuarioPropietario, etiquetas }) => {
             </div>
           </div>
         </div>
-      </div>
+      </>
     );
   };
 

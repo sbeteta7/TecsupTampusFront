@@ -1,26 +1,75 @@
 import React, { useEffect, useState } from "react";
 import Header from "../organisms/Header";
 import QuiltedImageList from "./Imagenes";
+import { useParams } from "react-router-dom";
 import Reser_IMG from "../molecules/Reser_IMG";
+import AnuncioServices from "../../services/AnuncioServices";
+import EtiquetaService from "../../services/EtiquetaService";
 function AnuncioInfo() {
+      const [anuncioInfo, setAnuncioInfo] = useState();
+  const [imagenesAnuncio, setImagenesAnuncio] = useState([]);
+  const [etiquetasAnuncio, setEtiquetasAnuncio] = useState([]);
+  const [usuarioPropietario, setUsuarioPropietario] = useState({});
+  const { id } = useParams();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Obtener información del anuncio
+        const anuncioResponse = await AnuncioServices.detailAnuncio(id);
+        setAnuncioInfo(anuncioResponse.data);
+
+        // Obtener imágenes del anuncio
+        const imagenesResponse = await AnuncioServices.getImagenesByIdAnuncio(id);
+        setImagenesAnuncio(imagenesResponse.data);
+        console.log(imagenesResponse.data);
+        // Obtener etiquetas del anuncio
+        const etiquetasResponse = await EtiquetaService.getByIdAnuncio(id);
+        setEtiquetasAnuncio(etiquetasResponse.data);
+
+        // Obtener propietario del anuncio
+        const propietarioResponse = await AnuncioServices.getUserByAnuncio(id);
+        setUsuarioPropietario(propietarioResponse.data);
+      } catch (error) {
+        console.error("Error al cargar la información del anuncio", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+    const sizePorIndex = (index) => {
+        const sizes = [
+          {'width': 1240, 'height': 600},
+          {'width': 800, 'height': 600},
+          {'width': 1240, 'height': 600},
+          {'width': 1080, 'height': 800},
+          {'width': 1920, 'height': 1080},
+        ];
+      
+        return sizes[index % sizes.length];
+      };
+
+ 
     return (
         <>
 
             <Header />
+            
+            {anuncioInfo && (
             <div className="w-10/12 m-5 mx-auto ">
                 {/* IMAGENES */}
                 <div className="w-full">
                 <div className="my-5 ">
-                    <Reser_IMG />
+
+                <Reser_IMG imagenesAnuncio={imagenesAnuncio} sizePorIndex={sizePorIndex}/>
+
                 </div>
                 </div>
-
-
                 {/* CONTENIDO */}
-        
                 <div className="relative">
-                <div class="absolute top-20 right-0 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="absolute top-20 right-0 w-full max-w-sm bg-white border border-gray-200 rounded-lg
+                 shadow dark:bg-gray-800 dark:border-gray-700">
                             <div class="flex justify-end px-4 pt-4">
                                
 
@@ -28,7 +77,7 @@ function AnuncioInfo() {
 
                             <div class="flex flex-col items-start ml-5 pb-10 ">
                                 <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Precio</h5>
-                                <p>$150-$200</p>
+                                <p>{anuncioInfo.precio}</p>
 
                                 <div class="flex mt-4 md:mt-6">
                                     <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center
@@ -44,7 +93,8 @@ function AnuncioInfo() {
                     {/* TITULO Y SIMBOLO DE FAVORITO */}
                     <div className="flex justify-between">
                         <div>
-                        <p className='text-left text-gray-700 text-[40px] font-semibold py-4'>Cuarto para joven solo, estudiante</p>
+                        <p className='text-left text-gray-700 text-[40px] font-semibold py-4'>{anuncioInfo.titulo}</p>
+                        <p>{}</p>
                         </div>
 
                         <div>
@@ -57,22 +107,30 @@ function AnuncioInfo() {
                         <div className="my-5">
                             {/* UBICACION */}
                             <div className="my-1">
-                                <p className='text-[20px]'>Santa Anita, Lima</p>
+                                <p className='text-[20px]'>{anuncioInfo.ubicacion}</p>
                             </div>
                             {/* ETIQUETAS */}
                             <div className="my-1">
-                                <div className="flex">
-                                    <div className="border-2 border-indigo-400 w-max mx-2 mt-1 px-1 rounded-lg">agua</div>
-                                    <div className="border-2 border-indigo-400 w-max mx-2 mt-1 px-1 rounded-lg">agua</div>
-                                    <div className="border-2 border-indigo-400 w-max mx-2 mt-1 px-1 rounded-lg">agua</div>
+                            {etiquetasAnuncio && (
+                            <div className="flex">
+                                {etiquetasAnuncio.map((etiqueta) => (
+                                <div className="border-2 border-indigo-400 w-max mx-2 mt-1 px-1 rounded-lg" key={etiqueta.id}>
+                                    {etiqueta.nombre}
                                 </div>
+                                ))
+
+                                }
+
+                            </div>
+                            )}
                             </div>
                         </div>
                         {/* DESCRIPTION */}
                         <div className="my-5">
                             <p>Descripcion</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam ab commodi corporis temporibus rerum voluptatum quasi ratione veritatis, provident qui. Delectus asperiores quidem libero? Quaerat possimus dolorem impedit nemo hic?</p>
+                            <p>{anuncioInfo.descripcion}</p>
                         </div>
+
                         {/* CARACTERISTICAS A*/}
                         <div className="my-5">
                             <p>Caracteristicas</p>
@@ -99,7 +157,7 @@ function AnuncioInfo() {
                 </div>
             </div>
  
-           
+ )}
             
         </>
     );
