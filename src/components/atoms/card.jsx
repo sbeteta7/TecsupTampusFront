@@ -16,8 +16,8 @@ const CardAnuncio = ({ anuncio, imagenes, usuarioPropietario, etiquetas }) => {
     };
   
     return (
-      <div className="xl:w-1/4 sm:w-1/2 w-full p-2  hover:scale-105 duration-300">
-        <div className="bg-gray-100 rounded-lg">
+      <>
+
           <Slider {...sliderSettings}>
             {imagenes.map((imagen, index) => (
               <div className="carousel-item" key={index}>
@@ -52,8 +52,7 @@ const CardAnuncio = ({ anuncio, imagenes, usuarioPropietario, etiquetas }) => {
               ))}
             </div>
           </div>
-        </div>
-      </div>
+ </>
     );
   };
 

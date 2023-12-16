@@ -31,7 +31,7 @@ function App() {
           <Route path="/cuenta" element={<Perfil/>} />
           <Route path="/cuenta" element={<Ajustes/>} />
           <Route path="/mapa" element={<HomeMap/>} />
-          <Route path="/anuncio" element={<AnuncioInfo/>} />
+          <Route path="/anuncio/:id" element={<AnuncioInfo/>} />
           <Route path="/registerplus/*" element={<RegisterPlus />} />
           <Route path="/reserva" element={<Reservas/>} />
         </Routes>

@@ -9,6 +9,7 @@ const IMAGEN_GET_API_URL = "http://localhost:8091/file/download/"
 const IMAGEN_ANUNCIO_GET_API_URL = "http://localhost:8091/api/anuncioFiles/getFilesByAnuncio/"
 const USER_GET_BYANUNCIO_URL="http://localhost:8091/api/anuncios/usuario/"
 const ANUNCIO_BY_USER_GET_API_URL = "http://localhost:8091/api/anuncios/getByUser/"
+const ANUNCIO_GET_BY_ID = "http://localhost:8091/api/anuncios/detail/"
 
 class AnuncioServices {
   getAnuncio() {
@@ -97,6 +98,16 @@ class AnuncioServices {
     return axios.get(url, { headers });
   }
   
+  detailAnuncio(id) {
+    const token = localStorage.getItem('auth_token');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    const url = `${ANUNCIO_GET_BY_ID}${id.toString()}`;
+
+    return axios.get(url, { headers });
+  }
   
 
 
