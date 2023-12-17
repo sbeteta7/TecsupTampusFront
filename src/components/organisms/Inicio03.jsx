@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAuth } from '../Context/Context';
 
 import { Link } from 'react-router-dom';
 
@@ -11,6 +12,9 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import PublishForm from '../molecules/PublishForm';
 const Inicio03 = () => {
+
+  const Auth = useAuth()
+  const isLoggedIn = Auth.userIsAuthenticated()
 
   return (
     <>
@@ -25,10 +29,16 @@ const Inicio03 = () => {
             <p className='md:text-2xl text-xl font-bold text-gray-600'>¿Deseas publicar un cuarto?</p>
 
   
-            <button  className='bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-black'>
-            <Link to='/Publicar/Form'>
-              <p>Publicar</p>
-            </Link>  
+            <button className='bg-[#00df9a] w-[200px] rounded-md font-medium my-6 mx-auto py-3 text-black'>
+              {isLoggedIn ? (
+                <Link to='/publicar/form'>
+                  <p>Publicar</p>
+                </Link>
+              ) : (
+                <Link to='/login'>
+                  <p>Inicia sesión aqui !</p>
+                </Link>
+              )}
             </button>
      
         </div>

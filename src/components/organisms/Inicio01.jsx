@@ -14,6 +14,7 @@ const Inicio01 = () => {
   const [usuarioPropietario, setUsuarioPropietario] = useState({});
   const [currentIndex, setCurrentIndex] = useState({});
 
+
   useEffect(() => {
     AnuncioServices.getAnuncio()
       .then((response) => {
@@ -105,18 +106,38 @@ const Inicio01 = () => {
             </h1>
             <div className="h-1 w-20 bg-indigo-500 rounded"></div>
           </div>
-          <p className="lg:w-1/2 w-full leading-relaxed text-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis maiores
-            recusandae dicta quas minus expedita natus rerum dolorem nisi maxime
-            molestias qui, dignissimos reprehenderit amet magnam sit blanditiis veniam
-            voluptate.
+          <p className="lg:w-1/2 w-full leading-relaxed text-gray-500 text-[20px]">
+          "En cada paso de tu camino, estamos aquí para ofrecerte apoyo y soluciones. 
+          Nuestra dedicación es mantenerte cerca, proporcionando servicios que se adaptan 
+          a tus necesidades, porque tu comodidad y satisfacción son nuestra prioridad."
           </p>
         </div>
 
+        <h1 className='text-[#00df9a] font-bold text-4xl mt-[-20px] mb-[40px] text-center'>Propiedades disponibles</h1>
+
+        <div className='font-semibold text-black mb-2 text-[17px] ' >Etiquetas</div>
+        <div className='mb-3 flex items-center'>
+          <div className='flex-1'>
+            <button className='mr-3 mt-2 shadow-sm px-2 py-1 bg-gray-100 border-orange-600 rounded-md text-orange-600 hover:bg-orange-600 hover:text-white' onClick={() => handleFiltro(null)}>Todos</button>
+            <button className='mr-3 mt-2 shadow-sm px-2 py-1 bg-gray-100 border-orange-600 rounded-md text-orange-600 hover:bg-orange-600 hover:text-white' onClick={() => handleFiltro('Luz')}>Luz</button>
+            <button className='mr-3 mt-2 shadow-sm px-2 py-1 bg-gray-100 border-orange-600 rounded-md text-orange-600 hover:bg-orange-600 hover:text-white' onClick={() => handleFiltro('Agua')}>Agua</button>
+            <button className='mr-3 mt-2 shadow-sm px-2 py-1 bg-gray-100 border-orange-600 rounded-md text-orange-600 hover:bg-orange-600 hover:text-white' onClick={() => handleFiltro('Mascotas')}>Mascotas</button>
+          </div>
+          <div className='flex items-center'>
+            <input
+              type='text'
+              placeholder='Buscar...'
+              className='border border-gray-300 px-2 py-1 rounded-md'
+            />
+            <button className='ml-2 px-3 py-1 bg-gray-100 border-orange-600 rounded-md text-orange-600 hover:bg-orange-600 hover:text-white'>Buscar</button>
+          </div>
+        </div>
+        
+
         <div className="flex flex-wrap">
           {anuncios.map((anuncio) => (
-              <div className="xl:w-1/4 sm:w-1/2 w-full p-2  hover:scale-105 duration-300">
-              <div className="bg-gray-100 rounded-lg" onClick={() => handleAnuncio(anuncio.idAnuncio)}>   
+            <div className="xl:w-1/4 sm:w-1/2 w-full p-2  hover:scale-105 duration-300">
+            <div className="bg-gray-100 rounded-lg" onClick={() => handleAnuncio(anuncio.idAnuncio)}>   
             <CardAnuncio
               
               key={anuncio.idAnuncio}
@@ -129,8 +150,8 @@ const Inicio01 = () => {
               usuarioPropietario={usuarioPropietario[anuncio.idAnuncio]}
               etiquetas={etiquetasAnuncio[anuncio.idAnuncio] || []}
             />
-           </div>
-           </div>
+            </div>
+            </div>
           ))}
         </div>
       </div>

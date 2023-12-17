@@ -101,14 +101,14 @@ const LoginForm = () => {
                         alt="Phone image" />
                     </div>
 
-                    <div class="md:w-8/12 lg:ml-6 lg:w-5/12 ">
+                    <div class="md:w-8/12 md:my-14 lg:ml-6 lg:w-5/12 border border-black rounded-xl shadow-lg p-10">
                         <form onSubmit={handleLogin}>
                             <div className='text-4xl font-mono text-center mb-7'>ÚNETE A NOSOTROS</div>
                             <div class="relative mb-6" data-te-input-wrapper-init>
                                 <p className='mb-3'>Email Address</p>
                                 <input
                                 type="text"
-                                class="peer block min-h-[auto] w-full rounded bg-white px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-black dark:placeholder:text-black [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                class="peer border border-gray-500 block min-h-[auto] w-full rounded bg-white px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-black dark:placeholder:text-black [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                                 id="exampleFormControlInput3"
                                 placeholder="Email address" 
                                 onChange={(e)=>setEmail(e.target.value)}
@@ -124,7 +124,7 @@ const LoginForm = () => {
                                 <p className='mb-3'>Password</p>
                                 <input
                                     type="password"
-                                    class="peer block min-h-[auto] w-full rounded bg-white px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-black dark:placeholder:text-black [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                    class="peer border border-gray-500 block min-h-[auto] w-full rounded bg-white px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-black dark:placeholder:text-black [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                                     id="exampleFormControlInput33"
                                     placeholder="Password" 
                                     onChange={(e)=>setPassword(e.target.value)}/>
