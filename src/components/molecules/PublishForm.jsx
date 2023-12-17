@@ -180,7 +180,7 @@ const onFileChange = (event) => {
             <FormControl sx={FormStyle}>
               <FormMap onUbicacionChange={handleUbicacionChange}/>
               
-              <Box >
+              <Box style={{ marginBottom: 15, marginTop: 15, border: '1px solid #ddd' }} >
               <Card variant="outlined" >
                 <CardContent>
                   {/* <Typography variant="body2" color="text.secondary"> */}
@@ -236,7 +236,7 @@ const onFileChange = (event) => {
                 height: '50px', // Altura del área de carga
                 cursor: 'pointer',
                 border: '1px dashed', // Borde punteado para indicar área de carga
-                marginTop: '5px', // Espacio entre el área de carga y las imágenes
+                marginTop: '10px' // Espacio entre el área de carga y las imágenes
               }}
             >
               <input id='image-input' type="file" multiple onChange={onFileChange} />
@@ -257,33 +257,34 @@ const onFileChange = (event) => {
                       multiline  // Permite múltiples líneas
                       rows={4}    // Ajusta la altura según tus necesidades
                       fullWidth
+                      style={{ marginTop: 20 }}
                       onChange={(e)=>setDescripcion(e.target.value)}
                     />
                 </CardContent>
               </Card>
               </Box>
               <Box>
-                <p>Tipo de espacio</p>           
+                <p className='mb-3 font-semibold'>Tipo de espacio</p>           
                 <RadioGroup
                     aria-label="custom-radio-group"
                     name="TipoEspacio"    
                   >
                   <div>
-                    <input type="radio" id="habitacion" name="TipoEspacio" value="Habitación"
+                    <input className='mb-2 ml-3' type="radio" id="habitacion" name="TipoEspacio" value="Habitación"
                       onChange={(e)=> setTipoEspacio(e.target.value)}  />
-                    <label htmlFor="habitacion">Habitación</label>
+                    <label className='ml-2' htmlFor="habitacion">Habitación</label>
                   </div>
 
                   <div>
-                    <input type="radio" id="departamento" name="TipoEspacio" value="Departamento" 
+                    <input className='mb-2 ml-3' type="radio" id="departamento" name="TipoEspacio" value="Departamento" 
                       onChange={(e)=> setTipoEspacio(e.target.value)}/>
-                    <label htmlFor="departamento">Departamento</label>
+                    <label className='ml-2' htmlFor="departamento">Departamento</label>
                   </div>
 
                   <div>
-                    <input type="radio" id="casa" name="TipoEspacio" value="Casa" 
+                    <input className='mb-5 ml-3' type="radio" id="casa" name="TipoEspacio" value="Casa" 
                       onChange={(e)=> setTipoEspacio(e.target.value)}/>
-                    <label htmlFor="casa">Casa</label>
+                    <label className='ml-2' htmlFor="casa">Casa</label>
                   </div>
                 </RadioGroup>
               </Box>
@@ -291,29 +292,30 @@ const onFileChange = (event) => {
                 <RangePublishForm/>
               </Box> */}
               <Box>
-                <p>Precio</p>
-                <NumberInputBasic name="Precio"
+                <p className='font-semibold'>Precio</p>
+                <NumberInputBasic className='my-3' name="Precio"
                 onChange={(e)=> setPrecio(e.target.value)}/>
 
               </Box>
               <Box>
-                <p>Dimensiones en m2</p>
-                <NumberInputBasic name="Dimension" onChange={(e)=> setDimensiones(e.target.value)}/>
+                <p className='font-semibold'>Dimensiones en m2</p>
+                <NumberInputBasic className='my-4' name="Dimension" onChange={(e)=> setDimensiones(e.target.value)}/>
               </Box>
               <Box>
-                <p>Numero de habitaciones</p>
-                <MinimumNumberInput name="NumHabitacion" onChange={(e)=> setNumHabitaciones(e.target.value)}/>
+                <p className='font-semibold'>Numero de habitaciones</p>
+                <MinimumNumberInput className='my-4' name="NumHabitacion" onChange={(e)=> setNumHabitaciones(e.target.value)}/>
               </Box>
               <Box>
-                <p>Numero de camas</p>
-                <MinimumNumberInput name="NumCamas" onChange={(e)=> setNumCamas(e.target.value)} />
+                <p className='font-semibold'>Numero de camas</p>
+                <MinimumNumberInput className='my-4' name="NumCamas" onChange={(e)=> setNumCamas(e.target.value)} />
               </Box>
 
               <Box>
+              <p className='font-semibold mb-5'>Etiquetas</p>
             {etiquetas.map((etiqueta) => (
               
               
-                <div key={etiqueta.id_etiqueta}>
+                <div className='ml-5' key={etiqueta.id_etiqueta}>
                   <FormGroup>
                   <FormControlLabel control={<Checkbox
                   value={etiqueta.id_etiqueta}

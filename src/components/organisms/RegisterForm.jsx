@@ -67,7 +67,7 @@ const   RegisterForm = () => {
                         />
                     </div>
 
-                    <div className="md:w-8/12 lg:ml-6 lg:w-5/12 ">
+                    <div class="md:w-8/12 md:my-14 lg:ml-6 lg:w-5/12 border border-black rounded-xl shadow-lg px-8">
                         <form onSubmit={handleRegister}>
                             <div className="text-4xl font-mono text-center mb-7 md:mt-10">Registro</div>
                             <div className="relative mb-6">
