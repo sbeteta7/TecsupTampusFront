@@ -6,38 +6,30 @@ import { useAuth } from '../Context/Context';
 import UserService from "../../services/userService";
 
 function Perfil() {
-    const Auth = useAuth()
-    const id_usuario = Auth.getUser().data.idUser
-  const [idUser,setIdUser]=useState(id_usuario) 
-  const [userData, setUserData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-   // confirmPassword: '',
-    fechaNacimiento:'',
-    telefono:'',
-    role:''
+    const Auth = useAuth();
+    const [userData, setUserData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        fechaNacimiento: '',
+        telefono: '',
+        role: ''
+    });
 
-});
-
-  
     useEffect(() => {
-        // Intenta obtener el token del almacenamiento local
-        try {
-            console.log("usuario : " + idUser + "TIPO DE DATO : " + typeof(idUser))
-            UserService.findUserById(idUser).then((res) => {
-                console.log(res.data);
-                setUserData(res.data);
-                //setUser(res.data);
-            }).catch((err) => {
-                console.log(err);
+        const fetchData = async () => {
+            try {
+                const user = Auth.getUser();
+                const response = await UserService.findUserById(user.data.id_user);
+                setUserData(response.data);
+            } catch (error) {
+                console.log(error);
             }
-            );
-        } catch (error) {
-            console.log(error)
-        }
-    }, []);
+        };
+
+        fetchData();
+    }, [Auth]);
 
     return (
         <>

@@ -16,16 +16,19 @@ import FormMap from './FormMap';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { LoadScriptProvider } from '../Context/MapContext/';
 
+
 function PublishForm() {
   const Auth = useAuth()
   const id_usuario = Auth.getUser().data.id_user
-  const [idUser,setIdUser]=useState(id_usuario) 
+  const [idUser,setIdUser]=useState(id_usuario)
+
 
   const [idAnuncio,setIdAnuncio] = useState()
   const [titulo, setTitulo] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [ubicacion, setUbicacion] = useState('');
   const [precio, setPrecio] = useState();
+
 
   const [tipoEspacio, setTipoEspacio] = useState('');
   const [numHab, setNumHabitaciones] = useState();
@@ -36,10 +39,12 @@ function PublishForm() {
   const [selectedImages, setSelectedImages] = useState([]);
   const [postImages, setPostImages] = useState([]);
 
+
    // Función de devolución de llamada para manejar cambios en la ubicación
    const handleUbicacionChange = (nuevaUbicacion) => {
     setUbicacion(nuevaUbicacion);
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,10 +53,13 @@ function PublishForm() {
     // Lógica de envío del formulario
   };
 
+
 useEffect(()=>{
+
 
   EtiquetaServices.getAllEtiquetas().then(response =>{
     setEtiquetas(response.data);
+
 
   }).catch(error=>{
     console.log(error);
@@ -60,26 +68,32 @@ useEffect(()=>{
 
 
 
+
+
+
   const saveAnuncio = (e) => {
     e.preventDefault();
-    
+   
     const anuncio = {idUser,titulo,descripcion,ubicacion,precio,tipoEspacio,numHab,numCama,dimensiones};
     AnuncioServices.createAnuncio(anuncio)
   .then(response=>{
     const id=response.data.idAnuncio
     setIdAnuncio(id)
 
+
     const selectedEtiquetas = etiquetas.filter((etiqueta) => postEtiquetas.includes(etiqueta.idEtiqueta));
     setPostEtiquetas(selectedEtiquetas);
     associateEtiquetasWithAnuncio(id);
+
 
     // Envía las imágenes al servidor
     const formData = new FormData();
     for (const key of Object.keys(selectedImages)) {
       formData.append('files', selectedImages[key].file);
     }
-    
+   
     console.log("FORM DATA: " + JSON.stringify(selectedImages))
+
 
     AnuncioServices.createImagen(formData).then((response) => {
         console.log(response.data);
@@ -89,11 +103,12 @@ useEffect(()=>{
         associateFilesWithAnuncio(id, id_imagenes);
     }).catch(error => {
         console.log(error);
-    }); 
+    });
   }).catch(error=>{
     console.log(error)
   })
 }
+
 
 const associateFilesWithAnuncio = (idAnuncio,id_imagenes) => {
   //const id_files = postImages.map(file => file.id);
@@ -111,6 +126,7 @@ const associateFilesWithAnuncio = (idAnuncio,id_imagenes) => {
     });
 };
 
+
 const associateEtiquetasWithAnuncio = (idAnuncio) => {
   const id_etiquetas = postEtiquetas.map(etiqueta => etiqueta.idEtiqueta);
   const requestBody = {
@@ -126,6 +142,7 @@ const associateEtiquetasWithAnuncio = (idAnuncio) => {
       console.log(error);
     });
 };
+
 
 const handleEtiquetaChange = (etiquetaId, isChecked) => {
   // Copia el estado actual de postEtiquetas en una nueva variable
@@ -147,6 +164,7 @@ const handleEtiquetaChange = (etiquetaId, isChecked) => {
   setPostEtiquetas(updatedPostEtiquetas);
 };
 
+
 const FormStyle={
   width:'80%',
   position:'relative',
@@ -154,38 +172,50 @@ const FormStyle={
   left:'10%'
 }
 
+
 const onFileChange = (event) => {
   event.preventDefault();
   const selectedFiles = event.target.files;
+
+
   // Asegúrate de no exceder el límite de 5 imágenes
   if (selectedFiles.length + selectedImages.length > 5) {
     console.log("No puedes subir más de 5 imágenes");
     return;
   }
 
-  const newImages = Array.from(selectedFiles).map((file) => ({
-    id: Date.now(),
-    src: URL.createObjectURL(file),
-    file: file,
-  }));
-// Actualiza el estado selectedImages con todas las nuevas imágenes
-  setSelectedImages([...selectedImages, ...newImages]);
+
+  // Usa la función de callback para obtener la información más reciente
+  setSelectedImages(prevSelectedImages => {
+    const newImages = Array.from(selectedFiles).map((file) => ({
+      id: Date.now(),
+      src: URL.createObjectURL(file),
+      file: file,
+    }));
+
+
+    // Actualiza el estado selectedImages con todas las nuevas imágenes
+    return [...prevSelectedImages, ...newImages];
+  });
+
+
+  console.log("Las imágenes seleccionadas son:", selectedImages);
 };
 
 
     return(
-      
+     
         <>
           <div className='my-8'>
             <FormControl sx={FormStyle}>
               <FormMap onUbicacionChange={handleUbicacionChange}/>
-              
+             
               <Box >
               <Card variant="outlined" >
                 <CardContent>
                   {/* <Typography variant="body2" color="text.secondary"> */}
                     <Box my={2}>
-                      <TextField 
+                      <TextField
                         id="standard-basic"
                         label="Titulo"
                         variant="standard"
@@ -196,6 +226,7 @@ const onFileChange = (event) => {
                         onChange={(e)=>setTitulo(e.target.value)}
                       />
                     </Box>
+
 
                     <div
             style={{
@@ -248,6 +279,7 @@ const onFileChange = (event) => {
           </label>
         )}          
 
+
                     <TextField
                       id="outlined-basic"
                       label="Descripcion"
@@ -263,7 +295,7 @@ const onFileChange = (event) => {
               </Card>
               </Box>
               <Box>
-                <p>Tipo de espacio</p>           
+                <p>Tipo de espacio</p>          
                 <RadioGroup
                     aria-label="custom-radio-group"
                     name="TipoEspacio"    
@@ -274,14 +306,16 @@ const onFileChange = (event) => {
                     <label htmlFor="habitacion">Habitación</label>
                   </div>
 
+
                   <div>
-                    <input type="radio" id="departamento" name="TipoEspacio" value="Departamento" 
+                    <input type="radio" id="departamento" name="TipoEspacio" value="Departamento"
                       onChange={(e)=> setTipoEspacio(e.target.value)}/>
                     <label htmlFor="departamento">Departamento</label>
                   </div>
 
+
                   <div>
-                    <input type="radio" id="casa" name="TipoEspacio" value="Casa" 
+                    <input type="radio" id="casa" name="TipoEspacio" value="Casa"
                       onChange={(e)=> setTipoEspacio(e.target.value)}/>
                     <label htmlFor="casa">Casa</label>
                   </div>
@@ -294,6 +328,7 @@ const onFileChange = (event) => {
                 <p>Precio</p>
                 <NumberInputBasic name="Precio"
                 onChange={(e)=> setPrecio(e.target.value)}/>
+
 
               </Box>
               <Box>
@@ -309,10 +344,11 @@ const onFileChange = (event) => {
                 <MinimumNumberInput name="NumCamas" onChange={(e)=> setNumCamas(e.target.value)} />
               </Box>
 
+
               <Box>
             {etiquetas.map((etiqueta) => (
-              
-              
+             
+             
                 <div key={etiqueta.id_etiqueta}>
                   <FormGroup>
                   <FormControlLabel control={<Checkbox
@@ -325,26 +361,28 @@ const onFileChange = (event) => {
                   }
                   />} label={etiqueta.nombre} />
                 </FormGroup>
-                  
+                 
                   <br />
                 </div>
               ))}  
               </Box>          
               <Box>
-              
-                <LoadingButton 
+             
+                <LoadingButton
                   onClick={(e) => saveAnuncio(e)}
                   size='small'
                   variant='outlined'>
                   Publicar anuncio
                 </LoadingButton>
 
+
                 </Box>
-          
+         
             </FormControl>
           </div>
         </>
     )
 }
+
 
 export default PublishForm
