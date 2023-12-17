@@ -120,8 +120,6 @@ const associateFilesWithAnuncio = (idAnuncio,id_imagenes) => {
       console.log(error);
     });
 };
-
-
 const associateEtiquetasWithAnuncio = (idAnuncio) => {
   const id_etiquetas = postEtiquetas.map(etiqueta => etiqueta.idEtiqueta);
   const requestBody = {
@@ -171,15 +169,11 @@ const FormStyle={
 const onFileChange = (event) => {
   event.preventDefault();
   const selectedFiles = event.target.files;
-
-
   // Asegúrate de no exceder el límite de 5 imágenes
   if (selectedFiles.length + selectedImages.length > 5) {
     console.log("No puedes subir más de 5 imágenes");
     return;
   }
-
-
   // Usa la función de callback para obtener la información más reciente
   setSelectedImages(prevSelectedImages => {
     const newImages = Array.from(selectedFiles).map((file) => ({
@@ -204,13 +198,11 @@ const onFileChange = (event) => {
           <div className='my-8'>
             <FormControl sx={FormStyle}>
               <FormMap onUbicacionChange={handleUbicacionChange}/>
-<<<<<<< HEAD
-             
-              <Box >
-=======
+
+            
               
               <Box style={{ marginBottom: 15, marginTop: 15, border: '1px solid #ddd' }} >
->>>>>>> 3eb010241df06fc316c84e87c4b4170fae5578f5
+
               <Card variant="outlined" >
                 <CardContent>
                   {/* <Typography variant="body2" color="text.secondary"> */}
@@ -296,11 +288,10 @@ const onFileChange = (event) => {
               </Card>
               </Box>
               <Box>
-<<<<<<< HEAD
-                <p>Tipo de espacio</p>          
-=======
+    
+
                 <p className='mb-3 font-semibold'>Tipo de espacio</p>           
->>>>>>> 3eb010241df06fc316c84e87c4b4170fae5578f5
+
                 <RadioGroup
                     aria-label="custom-radio-group"
                     name="TipoEspacio"    
@@ -313,22 +304,14 @@ const onFileChange = (event) => {
 
 
                   <div>
-<<<<<<< HEAD
-                    <input type="radio" id="departamento" name="TipoEspacio" value="Departamento"
-=======
                     <input className='mb-2 ml-3' type="radio" id="departamento" name="TipoEspacio" value="Departamento" 
->>>>>>> 3eb010241df06fc316c84e87c4b4170fae5578f5
                       onChange={(e)=> setTipoEspacio(e.target.value)}/>
                     <label className='ml-2' htmlFor="departamento">Departamento</label>
                   </div>
 
 
                   <div>
-<<<<<<< HEAD
-                    <input type="radio" id="casa" name="TipoEspacio" value="Casa"
-=======
                     <input className='mb-5 ml-3' type="radio" id="casa" name="TipoEspacio" value="Casa" 
->>>>>>> 3eb010241df06fc316c84e87c4b4170fae5578f5
                       onChange={(e)=> setTipoEspacio(e.target.value)}/>
                     <label className='ml-2' htmlFor="casa">Casa</label>
                   </div>
@@ -361,15 +344,9 @@ const onFileChange = (event) => {
               <Box>
               <p className='font-semibold mb-5'>Etiquetas</p>
             {etiquetas.map((etiqueta) => (
-<<<<<<< HEAD
-             
-             
-                <div key={etiqueta.id_etiqueta}>
-=======
               
               
                 <div className='ml-5' key={etiqueta.id_etiqueta}>
->>>>>>> 3eb010241df06fc316c84e87c4b4170fae5578f5
                   <FormGroup>
                   <FormControlLabel control={<Checkbox
                   value={etiqueta.id_etiqueta}
