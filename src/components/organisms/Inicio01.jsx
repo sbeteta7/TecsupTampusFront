@@ -14,6 +14,44 @@ const Inicio01 = () => {
   const [usuarioPropietario, setUsuarioPropietario] = useState({});
   const [currentIndex, setCurrentIndex] = useState({});
 
+  const [filtro, setFiltro] = useState(null);
+
+  const handleFiltro = (filtroSeleccionado) => {
+    setFiltro(filtroSeleccionado);
+  };
+
+  // Luego, dentro del map donde renderizas las cards, puedes aplicar el filtro
+  const cardsFiltradas = anuncios
+    .filter((anuncio) => {
+      if (!filtro) {
+        return true;
+      }
+  
+      // Si hay filtro, verifica si el anuncio tiene la etiqueta seleccionada
+      return (
+        anuncio.etiquetas &&
+        anuncio.etiquetas.some((etiqueta) => 
+          etiqueta.toLowerCase().includes(filtro.toLowerCase())
+        )
+      );
+    })
+    .map((anuncio) => (
+      <div key={anuncio.idAnuncio} className="xl:w-1/4 sm:w-1/2 w-full p-2 hover:scale-105 duration-300">
+        <div className="bg-gray-100 rounded-lg" onClick={() => handleAnuncio(anuncio.idAnuncio)}>
+          <CardAnuncio
+            key={anuncio.idAnuncio}
+            anuncio={anuncio}
+            imagenes={imagenesAnuncio
+              .filter((imagen) => imagen.idAnuncio === anuncio.idAnuncio)
+              .map((imagen) => imagen.imagenes)
+              .flat()}
+            usuarioPropietario={usuarioPropietario[anuncio.idAnuncio]}
+            etiquetas={etiquetasAnuncio[anuncio.idAnuncio] || []}
+          />
+        </div>
+      </div>
+    ));
+
   useEffect(() => {
     AnuncioServices.getAnuncio()
       .then((response) => {
@@ -112,25 +150,17 @@ const Inicio01 = () => {
           </p>
         </div>
 
+        <div className='mb-3'>
+        {/* Botones de filtro (solo sirve el de Todos :c) */}
+        <button onClick={() => handleFiltro(null)}>Todos</button>
+        <button className='ml-3' onClick={() => handleFiltro('Luz')}>Luz</button>
+        <button className='ml-3' onClick={() => handleFiltro('Agua')}>Agua</button>
+        <button className='ml-3' onClick={() => handleFiltro('Mascotas')}>Mascotas</button>
+        {/* Otros botones de filtro según tus necesidades */}
+      </div>
+
         <div className="flex flex-wrap">
-          {anuncios.map((anuncio) => (
-              <div className="xl:w-1/4 sm:w-1/2 w-full p-2  hover:scale-105 duration-300">
-              <div className="bg-gray-100 rounded-lg" onClick={() => handleAnuncio(anuncio.idAnuncio)}>   
-            <CardAnuncio
-              
-              key={anuncio.idAnuncio}
-              onclick
-              anuncio={anuncio}
-              imagenes={imagenesAnuncio
-                .filter((imagen) => imagen.idAnuncio === anuncio.idAnuncio)
-                .map((imagen) => imagen.imagenes)
-                .flat()}
-              usuarioPropietario={usuarioPropietario[anuncio.idAnuncio]}
-              etiquetas={etiquetasAnuncio[anuncio.idAnuncio] || []}
-            />
-           </div>
-           </div>
-          ))}
+          {cardsFiltradas}
         </div>
       </div>
     </section>
