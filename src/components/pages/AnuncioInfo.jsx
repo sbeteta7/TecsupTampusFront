@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import Reser_IMG from "../molecules/Reser_IMG";
 import AnuncioServices from "../../services/AnuncioServices";
 import EtiquetaService from "../../services/EtiquetaService";
+import ButtonWSP from "../atoms/ButtonWSP";
+
 function AnuncioInfo() {
       const [anuncioInfo, setAnuncioInfo] = useState();
   const [imagenesAnuncio, setImagenesAnuncio] = useState([]);
@@ -169,14 +171,18 @@ function AnuncioInfo() {
                         </div>
                     </div>
                     {/* MAPA DE LA UBICACION */}
+                    <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 lg:bottom-12 lg:right-12">
+                        <ButtonWSP />
+                    </div>
+
                     <div>
                         UBICACION
                     </div>
                     {/* PRECIO Y RESERVAR */}
                     <div className="">
                         
-                                        
-
+                                      
+                    
                         
 
                     </div>
