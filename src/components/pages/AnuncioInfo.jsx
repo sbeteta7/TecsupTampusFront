@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import Reser_IMG from "../molecules/Reser_IMG";
 import AnuncioServices from "../../services/AnuncioServices";
 import EtiquetaService from "../../services/EtiquetaService";
+import HomeMap from "../molecules/HouseMap";
 function AnuncioInfo() {
       const [anuncioInfo, setAnuncioInfo] = useState();
   const [imagenesAnuncio, setImagenesAnuncio] = useState([]);
@@ -171,6 +172,10 @@ function AnuncioInfo() {
                     {/* MAPA DE LA UBICACION */}
                     <div>
                         UBICACION
+                        <div>
+                            <HomeMap inputUbicacion={anuncioInfo.ubicacion}/>
+                        </div>
+
                     </div>
                     {/* PRECIO Y RESERVAR */}
                     <div className="">

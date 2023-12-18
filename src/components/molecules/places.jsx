@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 
-const CustomPlaces = ({ setOffice }) => {
+const CustomPlaces = ({ setOffice, inputUbicacion }) => {
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const { ready, value: inputVal, suggestions: { status, data }, setValue: setAutocompleteValue, clearSuggestions } = usePlacesAutocomplete();
@@ -39,7 +39,7 @@ const CustomPlaces = ({ setOffice }) => {
       <input
         id="custom-input"
         type="text"
-        value={value}
+        value={inputUbicacion}
         onChange={handleInput}
         placeholder="Ingresa la ubicación"
       />

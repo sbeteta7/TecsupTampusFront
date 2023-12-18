@@ -4,12 +4,13 @@ import "./mapp.css"
 /* 
 const GOOGLE_MAPS_API_KEY = env.config.REACT_APP_GOOGLE_MAPS_API_KEY;
  */
-export default function HomeMap() {
+const libraries = ["places"];
+export default function HomeMap({inputUbicacion}) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyBv9ybzxLdObqHWVAXUf-31feklbq7gjvw",
-    libraries: ["places"],
+    libraries
   });
 
   if (!isLoaded) return <div>Loading...</div>;
-  return <Map />;
+  return <Map inputUbicacion={inputUbicacion} />;
 }

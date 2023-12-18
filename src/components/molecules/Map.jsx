@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useRef } from "react";
+import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import {
   GoogleMap,
   Marker,
@@ -9,11 +9,20 @@ import {
 import Places from "./places";
 import Distance from "./distance";
 
-export default function Map() {
+export default function Map({inputUbicacion}) {
   const [office, setOffice] = useState();
+
+  useEffect(() => {
+    // Establecer la ubicación por defecto al cargar la página
+    setOffice(office);
+    fetchDirections(houses[0]);
+  }, []);
+
+
+
   const [directions, setDirections] = useState();
   const mapRef = useRef();
-  const center = useMemo(() => ({ lat: -12.04553225406447, lng: -76.95266246795654 }), []);
+  const center = useMemo(() => ({ lat: -12.043915198428687, lng: -76.95164022854821 }), []);
   const options = useMemo(() => ({
     mapId: "b181cac70f27f5e6",
     disableDefaultUI: true,
@@ -43,8 +52,9 @@ export default function Map() {
   return (
     <div className="container_map">
       <div className="controls">
-        <h1>Commute?</h1>
+        
         <Places
+          inputUbicacion={inputUbicacion}
           setOffice={(position) => {
             setOffice(position);
             mapRef.current?.panTo(position);
@@ -83,22 +93,22 @@ export default function Map() {
 
               <MarkerClusterer>
                 {(clusterer) =>
-                  houses.map((house) => (
+                  
                     <Marker
-                      key={house.lat}
-                      position={house}
+                      key={houses.lat}
+                      position={houses}
                       clusterer={clusterer}
                       onClick={() => {
-                        fetchDirections(house);
+                        fetchDirections(center);
                       }}
                     />
-                  ))
+                 
                 }
               </MarkerClusterer>
 
-              <Circle center={office} radius={15000} options={closeOptions} />
-              <Circle center={office} radius={30000} options={middleOptions} />
-              <Circle center={office} radius={45000} options={farOptions} />
+              <Circle center={center} radius={1500} options={closeOptions} />
+              <Circle center={center} radius={3000} options={middleOptions} />
+              <Circle center={center} radius={4500} options={farOptions} />
             </>
           )}
         </GoogleMap>
@@ -138,13 +148,10 @@ const farOptions = {
 };
 
 const generateHouses = (position) => {
-  const _houses = [];
-  for (let i = 0; i < 100; i++) {
-    const direction = Math.random() < 0.5 ? -2 : 2;
-    _houses.push({
-      lat: position.lat + Math.random() / direction,
-      lng: position.lng + Math.random() / direction,
-    });
-  }
+  const _houses = { 
+    lat: -12.045378413783505,
+    lng: -76.95261291860203 ,
+  };
+ 
   return _houses;
 };

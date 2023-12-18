@@ -87,20 +87,24 @@ const Inicio04 = () => {
                 <h1 class="sm:text-3xl text-2xl font-medium title-font  text-gray-900">Mis propiedades</h1>
             </div>
             <div className="flex flex-wrap -m-4">
-            { anuncios.map((anuncio)=>(
-                <CardAnuncio
-                key={anuncio.idAnuncio}
-                anuncio={anuncio}
-                imagenes={imagenesAnuncio
-                  .filter((imagen) => imagen.idAnuncio === anuncio.idAnuncio)
-                  .map((imagen) => imagen.imagenes)
-                  .flat()}
-                usuarioPropietario={usuarioPropietario[anuncio.idAnuncio]}
-                etiquetas={etiquetasAnuncio[anuncio.idAnuncio] || []}
-              />
-                
-            ))
-            }
+           { anuncios.map((anuncio) => (
+      <div className="xl:w-1/4 sm:w-1/2 w-full p-2  hover:scale-105 duration-300">
+      <div className="bg-gray-100 rounded-lg" onClick={() => handleAnuncio(anuncio.idAnuncio)}>   
+      <CardAnuncio
+        
+        key={anuncio.idAnuncio}
+        onclick
+        anuncio={anuncio}
+        imagenes={imagenesAnuncio
+          .filter((imagen) => imagen.idAnuncio === anuncio.idAnuncio)
+          .map((imagen) => imagen.imagenes)
+          .flat()}
+        usuarioPropietario={usuarioPropietario[anuncio.idAnuncio]}
+        etiquetas={etiquetasAnuncio[anuncio.idAnuncio] || []}
+      />
+      </div>
+      </div>
+    ))}
             </div>
                 
 
