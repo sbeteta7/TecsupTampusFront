@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "start": "serve dist -s -n -L -p $PORT",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -36,6 +37,7 @@
     "react-slick": "^0.29.0",
     "react-social-login-buttons": "^3.9.1",
     "reactjs-social-login": "^2.6.3",
+    "serve": "^14.2.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.1",
     "tw-elements": "^1.0.0",
