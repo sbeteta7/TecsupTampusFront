@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const HomeCP = () => {
 
     const [text] = useTypewriter ({
-        words: ['Penthouse', 'Apartamentos', 'Habitaciones', 'Terrazas'],
+        words: ['Casas', 'Departamentos', 'Habitaciones', 'Terrazas'],
         loop:{},
         typeSpeed: 80,
         deleteSpeed: 60,

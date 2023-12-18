@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Favorite } from "@mui/icons-material";
+import { FaHeart } from 'react-icons/fa';
 import Header from "../organisms/Header";
 import QuiltedImageList from "./Imagenes";
 import { useParams } from "react-router-dom";
@@ -11,6 +13,15 @@ function AnuncioInfo() {
   const [etiquetasAnuncio, setEtiquetasAnuncio] = useState([]);
   const [usuarioPropietario, setUsuarioPropietario] = useState({});
   const { id } = useParams();
+
+  //ICONO FAVORITOS
+  
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const handleToggleFavorite = () => {
+        setIsFavorite(!isFavorite);
+    };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,7 +68,7 @@ function AnuncioInfo() {
             <Header />
             
             {anuncioInfo && (
-            <div className="w-10/12 m-5 mx-auto ">
+            <div className="w-10/12 mb-5 mx-auto mt-10 ">
                 {/* IMAGENES */}
                 <div className="w-full">
                 <div className="my-5 ">
@@ -98,13 +109,26 @@ function AnuncioInfo() {
                         </div>
 
                         <div>
-                            <h1>Corazon</h1>
+                            <div>
+                                <button onClick={handleToggleFavorite}
+                                    style={{
+                                        transition: 'color 0.3s ease-out, transform 0.2s ease-out',
+                                        transform: isFavorite ? 'scale(1.2)' : 'scale(1)',
+                                    }}
+                                >
+                                    <FaHeart 
+                                        color={isFavorite ? 'red' : 'gray'} 
+                                        size={35} 
+                                        style={{ transition: 'color 0.3s ease-out' }} 
+                                    />
+                                </button>
+                            </div>
                         </div>
                         
                     </div>
                     {/* INFO DE ANUNCIO */}
                     <div className="w-3/5">
-                        <div className="my-5">
+                        <div className="my-4">
                             {/* UBICACION */}
                             <div className="my-1">
                                 <p className='text-[20px]'>{anuncioInfo.ubicacion}</p>
@@ -114,7 +138,7 @@ function AnuncioInfo() {
                             {etiquetasAnuncio && (
                             <div className="flex">
                                 {etiquetasAnuncio.map((etiqueta) => (
-                                <div className="border-2 border-indigo-400 w-max mx-2 mt-1 px-1 rounded-lg" key={etiqueta.id}>
+                                <div className="border-2 border-indigo-400 w-max mr-2 mt-3 px-1 rounded-lg" key={etiqueta.id}>
                                     {etiqueta.nombre}
                                 </div>
                                 ))
@@ -127,14 +151,16 @@ function AnuncioInfo() {
                         </div>
                         {/* DESCRIPTION */}
                         <div className="my-5">
+                            <p className='mb-5 text-gray-300 font-bold cursor-default'>______________________________________________________________</p>
                             <p>Descripcion</p>
-                            <p>{anuncioInfo.descripcion}</p>
+                            <p className='mt-2 ml-2'>{anuncioInfo.descripcion}</p>
                         </div>
 
                         {/* CARACTERISTICAS A*/}
                         <div className="my-5">
+                        <p className='mb-5 text-gray-300 font-bold cursor-default'>______________________________________________________________</p>
                             <p>Caracteristicas</p>
-                            <ul className="max-w-md space-y-1 text-500 list-disc list-inside dark:text-gray-400 ">
+                            <ul className="mt-3 ml-4 max-w-md space-y-1 text-500 list-disc list-inside dark:text-gray-400 ">
                                 <li> Espacios </li>
                                 <li> Numero de habitaciones </li>
                                 <li> Numero de camas</li>

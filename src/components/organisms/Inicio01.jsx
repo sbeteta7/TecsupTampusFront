@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useNavigate } from "react-router-dom";
 
 import CardAnuncio from "../atoms/card";
+import CardFiltro from "../molecules/CardFiltro";
 const Inicio01 = () => {
   const [anuncios, setAnuncios] = useState([]);
   const [imagenesAnuncio, setImagenesAnuncio] = useState([]);
@@ -115,13 +116,10 @@ const Inicio01 = () => {
 
         <h1 className='text-[#00df9a] font-bold text-4xl mt-[-20px] mb-[40px] text-center'>Propiedades disponibles</h1>
 
-        <div className='font-semibold text-black mb-2 text-[17px] ' >Etiquetas</div>
+        
         <div className='mb-3 flex items-center'>
           <div className='flex-1'>
-            <button className='mr-3 mt-2 shadow-sm px-2 py-1 bg-gray-100 border-orange-600 rounded-md text-orange-600 hover:bg-orange-600 hover:text-white' onClick={() => handleFiltro(null)}>Todos</button>
-            <button className='mr-3 mt-2 shadow-sm px-2 py-1 bg-gray-100 border-orange-600 rounded-md text-orange-600 hover:bg-orange-600 hover:text-white' onClick={() => handleFiltro('Luz')}>Luz</button>
-            <button className='mr-3 mt-2 shadow-sm px-2 py-1 bg-gray-100 border-orange-600 rounded-md text-orange-600 hover:bg-orange-600 hover:text-white' onClick={() => handleFiltro('Agua')}>Agua</button>
-            <button className='mr-3 mt-2 shadow-sm px-2 py-1 bg-gray-100 border-orange-600 rounded-md text-orange-600 hover:bg-orange-600 hover:text-white' onClick={() => handleFiltro('Mascotas')}>Mascotas</button>
+            <CardFiltro />
           </div>
           <div className='flex items-center'>
             <input
