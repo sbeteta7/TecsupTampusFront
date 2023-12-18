@@ -6,15 +6,12 @@ import { RadioGroup, FormControl,FormControlLabel,FormGroup,Checkbox,Card
 import { LoadingButton } from '@mui/lab';
 import MinimumNumberInput from '../atoms/MinimumNumberInput';
 import NumberInputBasic from '../atoms/NumberInputBasic';
-
-import FormImg from '../atoms/FormImg';
 import { Box } from '@mui/material';
-import userService from '../../services/userService';
 import { useAuth } from '../Context/Context';
 import Typography from '@mui/material/Typography';
 import FormMap from './FormMap';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { LoadScriptProvider } from '../Context/MapContext/';
+
 
 
 function PublishForm() {

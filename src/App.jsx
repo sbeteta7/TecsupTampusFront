@@ -30,7 +30,6 @@ function App() {
           <Route path="/publicar" element={<MisAnuncios/>} />
           <Route path="/publicar/form" element={<Publicar/>} />
           <Route path="/cuenta" element={<Perfil/>} />
-          <Route path="/cuenta" element={<Ajustes/>} />
           <Route path="/mapa" element={<HomeMap/>} />
           <Route path="/anuncio/:id" element={<AnuncioInfo/>} />
           <Route path= "/registerplus" element={<RegisterPlusIntro/>} />

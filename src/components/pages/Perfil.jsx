@@ -3,7 +3,7 @@ import Header from "../organisms/Header";
 import CardPerfil from "../molecules/CardPerfil";
 import BasicTabs from "../atoms/InfoGeneral";
 import { useAuth } from '../Context/Context';
-import UserService from "../../services/userService";
+import UserService from "../../services/UserServices";
 
 function Perfil() {
     const Auth = useAuth();
