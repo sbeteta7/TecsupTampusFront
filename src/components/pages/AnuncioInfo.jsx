@@ -8,6 +8,8 @@ import Reser_IMG from "../molecules/Reser_IMG";
 import AnuncioServices from "../../services/AnuncioServices";
 import EtiquetaService from "../../services/EtiquetaService";
 import HomeMap from "../molecules/HouseMap";
+import ButtonWSP from "../atoms/ButtonWSP";
+
 function AnuncioInfo() {
       const [anuncioInfo, setAnuncioInfo] = useState();
   const [imagenesAnuncio, setImagenesAnuncio] = useState([]);
@@ -152,7 +154,7 @@ function AnuncioInfo() {
                         </div>
                         {/* DESCRIPTION */}
                         <div className="my-5">
-                            <p className='mb-5 text-gray-300 font-bold cursor-default'>______________________________________________________________</p>
+                            <p   className='mb-5 text-gray-300 font-bold cursor-default'>______________________________________________________________</p>
                             <p>Descripcion</p>
                             <p className='mt-2 ml-2'>{anuncioInfo.descripcion}</p>
                         </div>
@@ -170,6 +172,10 @@ function AnuncioInfo() {
                         </div>
                     </div>
                     {/* MAPA DE LA UBICACION */}
+                    <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 lg:bottom-12 lg:right-12">
+                        <ButtonWSP />
+                    </div>
+
                     <div>
                         UBICACION
                         <div>
@@ -180,8 +186,8 @@ function AnuncioInfo() {
                     {/* PRECIO Y RESERVAR */}
                     <div className="">
                         
-                                        
-
+                                      
+                    
                         
 
                     </div>

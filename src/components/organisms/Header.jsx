@@ -48,11 +48,7 @@ const Header = () => {
                     }`}
                     to='/navegar'>Navegar
                 </Link>
-                <Link className={`p-4 hover:text-purple-800 hover:bg-[#e0fff5] transition-colors duration-300 ${
-                    location.pathname === '/Nosotros' ? 'bg-[#e0fff5] text-purple-800' : ''
-                    }`}
-                    to='/#'>Nosotros
-                </Link>
+                
                     
                 {isLoggedIn ? 
 
