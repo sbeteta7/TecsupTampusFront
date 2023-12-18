@@ -12,7 +12,6 @@ function Navegar() {
         <Header/>
         <Inicio00/>
         <Inicio01/>
-        <Inicio02/>
         <Footer/>
       </div>
     </>

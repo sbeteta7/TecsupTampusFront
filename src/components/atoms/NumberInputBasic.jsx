@@ -28,7 +28,7 @@ const NumberInput = React.forwardRef(function CustomNumberInput(props, ref) {
   );
 });
 
-export default function NumberInputBasic({ value, onChange, min = 1, max = 99, ...rest }) {
+export default function NumberInputBasic({ value, onChange, min = 1, max = 10000, ...rest }) {
 
   return (
     <NumberInput

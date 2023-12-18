@@ -32,7 +32,7 @@ function PublishForm() {
 
   const [tipoEspacio, setTipoEspacio] = useState('');
   const [numHab, setNumHabitaciones] = useState();
-  const [numCama, setNumCamas] = useState();
+  const [numCam, setNumCam] = useState();
   const [dimensiones, setDimensiones] = useState();
   const [etiquetas, setEtiquetas] = useState([]);
   const [postEtiquetas,setPostEtiquetas]=useState([])
@@ -60,7 +60,7 @@ useEffect(()=>{
   EtiquetaServices.getAllEtiquetas().then(response =>{
     setEtiquetas(response.data);
 
-
+console.log(response.data)
   }).catch(error=>{
     console.log(error);
   })
@@ -69,7 +69,7 @@ useEffect(()=>{
   const saveAnuncio = (e) => {
     e.preventDefault();
    
-    const anuncio = {idUser,titulo,descripcion,ubicacion,precio,tipoEspacio,numHab,numCama,dimensiones};
+    const anuncio = {idUser,titulo,descripcion,ubicacion,precio,tipoEspacio,numHab,numCam,dimensiones};
     AnuncioServices.createAnuncio(anuncio)
   .then(response=>{
     const id=response.data.idAnuncio
@@ -142,13 +142,13 @@ const handleEtiquetaChange = (etiquetaId, isChecked) => {
   const updatedPostEtiquetas = [...postEtiquetas];
   if (isChecked) {
     // Si el checkbox se marca, agrega la etiqueta completa al array
-    const etiqueta = etiquetas.find(etiqueta => etiqueta.id_etiqueta === etiquetaId);
+    const etiqueta = etiquetas.find(etiqueta => etiqueta.idEtiqueta === etiquetaId);
     if (etiqueta) {
       updatedPostEtiquetas.push(etiqueta);
     }
   } else {
     // Si el checkbox se desmarca, elimina la etiqueta del array
-    const index = updatedPostEtiquetas.findIndex(etiqueta => etiqueta.id_etiqueta === etiquetaId);
+    const index = updatedPostEtiquetas.findIndex(etiqueta => etiqueta.idEtiqueta === etiquetaId);
     if (index !== -1) {
       updatedPostEtiquetas.splice(index, 1);
     }
@@ -337,7 +337,7 @@ const onFileChange = (event) => {
               </Box>
               <Box>
                 <p className='font-semibold'>Numero de camas</p>
-                <MinimumNumberInput className='my-4' name="NumCamas" onChange={(e)=> setNumCamas(e.target.value)} />
+                <MinimumNumberInput className='my-4' name="NumCamas" onChange={(e)=> setNumCam(e.target.value)} />
               </Box>
 
 
@@ -346,13 +346,15 @@ const onFileChange = (event) => {
             {etiquetas.map((etiqueta) => (
               
               
-                <div className='ml-5' key={etiqueta.id_etiqueta}>
+                <div className='ml-5' key={etiqueta.idEtiqueta}>
                   <FormGroup>
-                  <FormControlLabel control={<Checkbox
-                  value={etiqueta.id_etiqueta}
+                  <FormControlLabel 
+                  control={
+                  <Checkbox
+                  value={etiqueta.idEtiqueta}
                   onChange={(e) =>
                     handleEtiquetaChange(
-                      etiqueta.id_etiqueta,
+                      etiqueta.idEtiqueta,
                       e.target.checked // Verifica si el checkbox se marca o desmarca
                     )
                   }
