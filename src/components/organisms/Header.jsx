@@ -53,12 +53,30 @@ const Header = () => {
                     }`}
                     to='/#'>Nosotros
                 </Link>
- 
-                <Link className={`p-4 hover:text-purple-800 hover:bg-[#e0fff5] transition-colors duration-300 ${
-                    location.pathname === '/publicar' ? 'bg-[#e0fff5] text-purple-800' : ''
-                    }`}
-                    to='/publicar'>Publicar
-                </Link>
+                    
+                {isLoggedIn ? 
+
+                    <>
+                        <Link className={`p-4 hover:text-purple-800 hover:bg-[#e0fff5] transition-colors duration-300 ${
+                            location.pathname === '/publicar' ? 'bg-[#e0fff5] text-purple-800' : ''
+                            }`}
+                            to='/publicar'>Publicar
+                        </Link>
+
+                        <Link className={`p-4 hover:text-purple-800 hover:bg-[#e0fff5] transition-colors duration-300 ${
+                            location.pathname === '/registerplus' ? 'bg-[#e0fff5] text-purple-800' : ''
+                            }`}
+                            to='/registerplus'>Arrendador
+                        </Link>
+                    </>
+                : 
+                    <Link className={`p-4 hover:text-purple-800 hover:bg-[#e0fff5] transition-colors duration-300 ${
+                        location.pathname === '/publicar' ? 'bg-[#e0fff5] text-purple-800' : ''
+                        }`}
+                        to='/publicar'>Publicar
+                    </Link>
+                }
+
             </ul>
 
             <div onClick={handleNav} className='block md:hidden'>
