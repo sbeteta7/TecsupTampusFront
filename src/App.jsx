@@ -13,6 +13,7 @@ import Publicar from "./components/pages/Publicar";
 import { LoadScriptProvider } from "./components/Context/MapContext";
 import RegisterPlus from "./components/pages/RegisterPlus";
 import Reservas from "./components/pages/Reservas";
+import RegisterPlusIntro from "./components/molecules/RegisterPlusIntro";
 function App() {
   return (
     <div className="">
@@ -32,6 +33,7 @@ function App() {
           <Route path="/cuenta" element={<Ajustes/>} />
           <Route path="/mapa" element={<HomeMap/>} />
           <Route path="/anuncio/:id" element={<AnuncioInfo/>} />
+          <Route path= "/registerplus" element={<RegisterPlusIntro/>} />
           <Route path="/registerplus/*" element={<RegisterPlus />} />
           <Route path="/reserva" element={<Reservas/>} />
         </Routes>
