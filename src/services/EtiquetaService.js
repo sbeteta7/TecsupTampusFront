@@ -1,6 +1,6 @@
 import axios from "axios";
-const ETIQUETA_GET_REST_API_URL ="http://localhost:8091/api/etiquetas/getAll";
-const ETIQUETA_BY_ID_ANUNCIO_REST_API_URL ="http://localhost:8091/api/anuncioEtiquetas/getEtiquetaByAnuncio/";
+const ETIQUETA_GET_REST_API_URL ="tecsuptampusfront-production.up.railway.app/api/etiquetas/getAll";
+const ETIQUETA_BY_ID_ANUNCIO_REST_API_URL ="tecsuptampusfront-production.up.railway.app/api/anuncioEtiquetas/getEtiquetaByAnuncio/";
 
 class EtiquetaServices{
     getAllEtiquetas(){

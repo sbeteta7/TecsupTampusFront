@@ -1,5 +1,5 @@
 import axios from "axios";
-const USER_GET_BYID = "http://localhost:8091/api/users/getUserById/";
+const USER_GET_BYID = "tecsuptampusfront-production.up.railway.app/api/users/getUserById/";
 
 class UserServices {
   findUserById(id) {
