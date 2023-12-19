@@ -3,14 +3,30 @@ const ETIQUETA_GET_REST_API_URL ="https://tecsuptampusfront-production.up.railwa
 const ETIQUETA_BY_ID_ANUNCIO_REST_API_URL ="https://tecsuptampusfront-production.up.railway.app/api/anuncioEtiquetas/getEtiquetaByAnuncio/";
 
 class EtiquetaServices{
+
+  async getAllEtiquetas() {
+    const token = localStorage.getItem('auth_token');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+ 
+    return axios.get(ANUNCIO_FILTRAR,  { headers })
+      .catch((error) => {
+        console.error(error)
+      });
+  }
+
     getAllEtiquetas(){
         const token = localStorage.getItem('auth_token');
         const headers = {
           Authorization: `Bearer ${token}`,
         };
     
-        return axios.get(ETIQUETA_GET_REST_API_URL, { headers })
-    }
+        return axios.get(ETIQUETA_GET_REST_API_URL,  { headers })
+        .catch((error) => {
+          console.error(error)
+        });
+    }    
 
     getByIdAnuncio(id) {
       const token = localStorage.getItem('auth_token');
@@ -20,7 +36,10 @@ class EtiquetaServices{
   
       const url = `${ETIQUETA_BY_ID_ANUNCIO_REST_API_URL}${id.toString()}`;
   
-      return axios.get(url, { headers });
-    }
+      return axios.get(url,  { headers })
+      .catch((error) => {
+        console.error(error)
+      });
+  }
 }
 export default new EtiquetaServices();

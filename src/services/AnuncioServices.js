@@ -13,100 +13,147 @@ const ANUNCIO_GET_BY_ID = "https://tampusback-production.up.railway.app/api/anun
 const ANUNCIO_FILTRAR = "https://tampusback-production.up.railway.app/api/anuncios/filtrar"
 
 class AnuncioServices {
-  getAnuncio() {
-    return axios.get(ANUNCIO_GET_REST_API_URL);
-  }
-  createAnuncio(anuncio) {
+  async getAnuncio() {
     const token = localStorage.getItem('auth_token');
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    return axios.post(ANUNCIO_REGISTER_REST_API_URL, anuncio, { headers });
-  }
-  associateEtiquetas(etiquetas) {
-    const token = localStorage.getItem('auth_token');
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    return axios.post(ETIQUETA_ANUNCIO_ADD_REST_API_URL, etiquetas, { headers });
+    const url = ANUNCIO_GET_REST_API_URL;
+
+    return axios.get(url, { headers })
+      .catch((error) => {
+        console.error(error)  
+      });
   }
 
-  createImagen(imagen) {
+  async createAnuncio(anuncio) {
     const token = localStorage.getItem('auth_token');
     const headers = {
       Authorization: `Bearer ${token}`,
     };
+    const url = ANUNCIO_REGISTER_REST_API_URL;
 
-
-    return axios.post(IMAGEN_REGISTER_REST_API_URL, imagen, { headers });
+    return axios.post(url, anuncio,  { headers })
+      .catch((error) => {
+        console.error(error)
+      });
   }
 
-   associateImagenes(imagenes) {
+  async associateEtiquetas(etiquetas) {
     const token = localStorage.getItem('auth_token');
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    return axios.post(IMAGEN_ANUNCIO_REST_API_URL, imagenes, { headers });
+    const url = ETIQUETA_ANUNCIO_ADD_REST_API_URL;
+
+    return axios.post(url,etiquetas,  { headers })
+      .catch((error) => {
+        console.error(error)
+      });
   }
-  getImagenById(id) {
+
+  async createImagen(imagen) {
     const token = localStorage.getItem('auth_token');
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    const url = `${IMAGEN_GET_API_URL}${id.toString()}`;
-    return axios.get(url, { headers });
+    const url = IMAGEN_REGISTER_REST_API_URL;
+
+    return axios.post(url,imagen,  { headers })
+      .catch((error) => {
+        console.error(error)
+      });
   }
+  
+  async associateImagenes(imagenes) {
+    const token = localStorage.getItem('auth_token');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    const url = IMAGEN_ANUNCIO_REST_API_URL;
+
+    return axios.post(url,imagenes,  { headers })
+      .catch((error) => {
+        console.error(error)
+      });
+  }
+
+  async getImagenById(id) {
+    const token = localStorage.getItem('auth_token');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    const url = IMAGEN_GET_API_URL;
+
+    return axios.get(url,id,  { headers })
+      .catch((error) => {
+        console.error(error)
+      });
+  }
+  
+  async getImagenesByIdAnuncio(id) {
+    const token = localStorage.getItem('auth_token');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    const url = `${IMAGEN_ANUNCIO_GET_API_URL}${id.toString()}`
+    return axios.get(url,  { headers })
+      .catch((error) => {
+        console.error(error)
+      });
+  }
+  
+
+  async getUserByAnuncio(id) {
+    const token = localStorage.getItem('auth_token');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    const url = `${USER_GET_BYANUNCIO_URL}${id.toString()}`
+    return axios.get(url,  { headers })
+      .catch((error) => {
+        console.error(error)
+      });
+  }
+
+  async getAnuncioByUser(id) {
+    const token = localStorage.getItem('auth_token');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    const url = `${ANUNCIO_BY_USER_GET_API_URL}${id.toString()}`
+    return axios.get(url,  { headers })
+      .catch((error) => {
+        console.error(error)
+      });
+  }
+
+  async detailAnuncio(id) {
+    const token = localStorage.getItem('auth_token');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    const url = `${ANUNCIO_GET_BY_ID}${id.toString()}`
+    return axios.get(url,  { headers })
+      .catch((error) => {
+        console.error(error)
+      });
+  }
+
+
+  async filtrarAnuncio(filtro) {
+    const token = localStorage.getItem('auth_token');
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    const url = `${ANUNCIO_FILTRAR}${filtro.toString()}`
+    return axios.get(url,  { headers })
+      .catch((error) => {
+        console.error(error)
+      });
+  }
+
  
-  getImagenesByIdAnuncio(id) {
-    const token = localStorage.getItem('auth_token');
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-
-
-    const url = `${IMAGEN_ANUNCIO_GET_API_URL}${id.toString()}`;
-
-
-    return axios.get(url, { headers });
-  }
-
-
-  getUserByAnuncio(id) {
-    const token = localStorage.getItem('auth_token');
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    const url = `${USER_GET_BYANUNCIO_URL}${id.toString()}`;
-    return axios.get(url, { headers });
-  }
-
-
-  getAnuncioByUser(id) {
-    const token = localStorage.getItem('auth_token');
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    const url = `${ANUNCIO_BY_USER_GET_API_URL}${id.toString()}`;
-    return axios.get(url, { headers });
-  }
- 
-  detailAnuncio(id) {
-    const token = localStorage.getItem('auth_token');
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    const url = `${ANUNCIO_GET_BY_ID}${id.toString()}`;
-    return axios.get(url, { headers });
-  }
-
-  filtrarAnuncio(filtro) {
-    const token = localStorage.getItem('auth_token');
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    const url = `${ANUNCIO_FILTRAR}${filtro.toString()}`;
-    return axios.get(url, { headers });
-  }
 
 }
 

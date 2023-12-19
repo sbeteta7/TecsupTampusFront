@@ -25,11 +25,15 @@ export const logout = () => {
 
 
 export function login(request){
-        return axios.post(AUTH_API_URL,request)
+        return axios.post(AUTH_API_URL,request)     .catch((error) => {
+          console.error(error)
+        });
 }
 
 export function register(request){
-  return axios.post(REGISTER_API_URL,request)
+  return axios.post(REGISTER_API_URL,request)     .catch((error) => {
+    console.error(error)
+  });
 }
 
 export function parseJwt(token) {
