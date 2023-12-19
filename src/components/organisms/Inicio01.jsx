@@ -5,7 +5,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useNavigate } from "react-router-dom";
-
 import CardAnuncio from "../atoms/card";
 import CardFiltro from "../molecules/CardFiltro";
 import { set } from "date-fns";
@@ -179,7 +178,7 @@ const Inicio01 = () => {
   const handleFiltrosChange = async (nuevosFiltros) => {
     setFiltros(nuevosFiltros);
     console.log('Filtros actualizados:', nuevosFiltros);
-    const url = `http://localhost:8091/api/anuncios/filtrar?` +
+    const url = `https://tampusback-production.up.railway.app/api/anuncios/filtrar?` +
       `precioMin=${nuevosFiltros.precioMin || ''}&` +
       `precioMax=${nuevosFiltros.precioMax || ''}&` +
       `tipoEspacio=${nuevosFiltros.tipoEspacio || ''}&` +
