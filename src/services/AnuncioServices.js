@@ -1,16 +1,16 @@
 import axios from "axios";
-const ANUNCIO_REGISTER_REST_API_URL = "http://localhost:8091/api/anuncios/store";
-const ANUNCIO_GET_REST_API_URL = "http://localhost:8091/api/anuncios/getAll";
-const ETIQUETA_ANUNCIO_ADD_REST_API_URL = "http://localhost:8091/api/anuncioEtiquetas/associate";
+const ANUNCIO_REGISTER_REST_API_URL = "https://tampusback-production.up.railway.app/api/anuncios/store";
+const ANUNCIO_GET_REST_API_URL = "https://tampusback-production.up.railway.app/api/anuncios/getAll";
+const ETIQUETA_ANUNCIO_ADD_REST_API_URL = "https://tampusback-production.up.railway.app/api/anuncioEtiquetas/associate";
 const IMAGEN_REGISTER_REST_API_URL = "http://localhost:8091/cloudinary/multiload";
-const IMAGEN_ANUNCIO_REST_API_URL = "http://localhost:8091/api/anuncioFiles/associate"
-const IMAGEN_GET_API_URL = "http://localhost:8091/file/download/"
-const IMAGEN_ANUNCIO_GET_API_URL = "http://localhost:8091/api/anuncioFiles/getFilesByAnuncio/"
+const IMAGEN_ANUNCIO_REST_API_URL = "https://tampusback-production.up.railway.app/api/anuncioFiles/associate"
+const IMAGEN_GET_API_URL = "https://tampusback-production.up.railway.app/file/download/"
+const IMAGEN_ANUNCIO_GET_API_URL = "https://tampusback-production.up.railway.app/api/anuncioFiles/getFilesByAnuncio/"
 
-const USER_GET_BYANUNCIO_URL="http://localhost:8091/api/anuncios/usuario/"
-const ANUNCIO_BY_USER_GET_API_URL = "http://localhost:8091/api/anuncios/getByUser/"
-const ANUNCIO_GET_BY_ID = "http://localhost:8091/api/anuncios/detail/"
-const ANUNCIO_FILTRAR = "http://localhost:8091/api/anuncios/filtrar"
+const USER_GET_BYANUNCIO_URL="https://tampusback-production.up.railway.app/api/anuncios/usuario/"
+const ANUNCIO_BY_USER_GET_API_URL = "https://tampusback-production.up.railway.app/api/anuncios/getByUser/"
+const ANUNCIO_GET_BY_ID = "https://tampusback-production.up.railway.app/api/anuncios/detail/"
+const ANUNCIO_FILTRAR = "https://tampusback-production.up.railway.app/api/anuncios/filtrar"
 
 class AnuncioServices {
   getAnuncio() {
