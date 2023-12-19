@@ -2,7 +2,7 @@ import axios from "axios";
 const ANUNCIO_REGISTER_REST_API_URL = "https://tampusback-production.up.railway.app/api/anuncios/store";
 const ANUNCIO_GET_REST_API_URL = "https://tampusback-production.up.railway.app/api/anuncios/getAll";
 const ETIQUETA_ANUNCIO_ADD_REST_API_URL = "https://tampusback-production.up.railway.app/api/anuncioEtiquetas/associate";
-const IMAGEN_REGISTER_REST_API_URL = "http://localhost:8091/cloudinary/multiload";
+const IMAGEN_REGISTER_REST_API_URL = "https://tampusback-production.up.railway.app/cloudinary/multiload";
 const IMAGEN_ANUNCIO_REST_API_URL = "https://tampusback-production.up.railway.app/api/anuncioFiles/associate"
 const IMAGEN_GET_API_URL = "https://tampusback-production.up.railway.app/file/download/"
 const IMAGEN_ANUNCIO_GET_API_URL = "https://tampusback-production.up.railway.app/api/anuncioFiles/getFilesByAnuncio/"

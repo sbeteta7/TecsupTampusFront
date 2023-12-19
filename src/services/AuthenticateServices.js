@@ -1,8 +1,8 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import React from "react";
-const AUTH_API_URL ="tecsuptampusfront-production.up.railway.app/api/auth/authenticate";
-const REGISTER_API_URL="tecsuptampusfront-production.up.railway.app/api/auth/register-estudiante"
+const AUTH_API_URL ="https://tecsuptampusfront-production.up.railway.app/api/auth/authenticate";
+const REGISTER_API_URL="https://tecsuptampusfront-production.up.railway.app/api/auth/register-estudiante"
 
 export const getAuthToken = () => {
     return window.localStorage.getItem('auth_token');
