@@ -101,4 +101,9 @@
     background-color: #bb7416; /* Color ligeramente más oscuro al pasar el mouse */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
+
+  .notScrollLogin{
+    height: calc(100vh - 80px); 
+    
+  }
   

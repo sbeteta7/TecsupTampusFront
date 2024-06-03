@@ -12,6 +12,7 @@ import { setAuthToken } from '../../services/AuthenticateServices';
 import { useAuth } from '../Context/Context'
 import { redirect } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import '../../styles.css'
 
 const LoginForm = () => {
     const Auth = useAuth()
@@ -89,21 +90,18 @@ const LoginForm = () => {
 
   return (
         <>
-        <section class="min-h-screen bg-[#f5e5c2]">
-            <Header/>
-            <div class="container h-full pl-16">
-                <div
-                class="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between pt-14">
-                    <div class="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
-                        <img
-                        src={Logo}
-                        class="w-full rounded-full"
-                        alt="Phone image" />
-                    </div>
 
-                    <div class="md:w-8/12 md:my-14 lg:ml-6 lg:w-5/12 border border-black rounded-xl shadow-lg p-10">
-                        <form onSubmit={handleLogin}>
-                            <div className='text-4xl font-mono text-center mb-7'>ÚNETE A NOSOTROS</div>
+            <Header/>
+            <div className="notScrollLogin">
+                <div className="flex-wrap grid grid-cols-2 notScrollLogin">
+                        <div className="flex justify-center bg-green-300 p-0 items-center  col-start-1 notScrollLogin ">
+                            <img src={Logo} className="w-full rounded-full justify-center md:w-4/12 w-3/12 lg:w-5/12 " alt="Phone image" />
+                        </div>
+
+                        <div className="flex justify-center items-center col-1 relative notScrollLogin" >
+                            <div className=' md:w-7/12 lg:w-8/12 h-5/6 border border-black rounded-xl shadow-lg'>
+                            <form onSubmit={handleLogin} className='py-3 px-16'>
+                            <div className='text-4xl font-mono text-center my-5 mb-7'>ÚNETE A NOSOTROS</div>
                             <div class="relative mb-6" data-te-input-wrapper-init>
                                 <p className='mb-3'>Email Address</p>
                                 <input
@@ -169,21 +167,15 @@ const LoginForm = () => {
                                 </button>
                            
 
-                            <div
-                                class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-                                <p
-                                    class="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
-                                    OR
-                                </p>
-                            </div>
+                      
+                            </form>
 
-                           
-                        </form>
-                        
+                            </div>
+                            
+                        </div>
                     </div>
-                </div>
             </div>
-        </section>
+        
         </>
   );
   

@@ -178,7 +178,7 @@ const Inicio01 = () => {
   const handleFiltrosChange = async (nuevosFiltros) => {
     setFiltros(nuevosFiltros);
     console.log('Filtros actualizados:', nuevosFiltros);
-    const url = `https://tampusback-production.up.railway.app/api/anuncios/filtrar?` +
+    const url = `https://localhost:8091/api/anuncios/filtrar?` +
       `precioMin=${nuevosFiltros.precioMin || ''}&` +
       `precioMax=${nuevosFiltros.precioMax || ''}&` +
       `tipoEspacio=${nuevosFiltros.tipoEspacio || ''}&` +
@@ -190,7 +190,6 @@ const Inicio01 = () => {
         // Llamar al servicio de AnuncioServices con la URL construida
         console.log(url);
         const resultados = await AnuncioServices.filtrarAnuncio(url);
-    
         // Manejar los resultados según sea necesario
         console.log('Resultados del filtrado:', resultados);
       } catch (error) {
@@ -198,37 +197,16 @@ const Inicio01 = () => {
         console.error('Error al filtrar anuncios:', error);
       }
   };
-  
-  
-
 
   return (
     <section className="text-gray-600 body-font flex">
       <div className="container px-5 py-24 mx-auto">
-        <div className="flex flex-wrap w-full mb-20">
-          <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
-            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
-              Siempre estamos cerca de ti...
-            </h1>
-            <div className="h-1 w-20 bg-indigo-500 rounded"></div>
-          </div>
-          <p className="lg:w-1/2 w-full leading-relaxed text-gray-500 text-[20px]">
-          "En cada paso de tu camino, estamos aquí para ofrecerte apoyo y soluciones. 
-          Nuestra dedicación es mantenerte cerca, proporcionando servicios que se adaptan 
-          a tus necesidades, porque tu comodidad y satisfacción son nuestra prioridad."
-          </p>
-        </div>
-
-        <h1 className='text-[#00df9a] font-bold text-4xl mt-[-20px] mb-[40px] text-center'>Propiedades disponibles</h1>
-
-        
      
+
+        <h1 className='text-[#00df9a] font-bold text-4xl mt-[-20px] mb-[40px] text-center'>Propiedades disponibles</h1>     
           <div className='sticky top-0 z-20'>
             <CardFiltro recibirAnuncios={recibirAnuncios} />
           </div>
-    
-        
-
         <div className="flex flex-wrap">
 {
   filtrando ? (
@@ -236,7 +214,6 @@ const Inicio01 = () => {
       <div className="xl:w-1/4 sm:w-1/2 w-full p-2  hover:scale-105 duration-300">
       <div className="bg-gray-100 rounded-lg" onClick={() => handleAnuncio(anuncio.idAnuncio)}>   
       <CardAnuncio
-        
         key={anuncio.idAnuncio}
         onclick
         anuncio={anuncio}
@@ -255,7 +232,6 @@ const Inicio01 = () => {
       <div className="xl:w-1/4 sm:w-1/2 w-full p-2  hover:scale-105 duration-300">
       <div className="bg-gray-100 rounded-lg" onClick={() => handleAnuncio(anuncio.idAnuncio)}>   
       <CardAnuncio
-        
         key={anuncio.idAnuncio}
         onclick
         anuncio={anuncio}
@@ -270,10 +246,7 @@ const Inicio01 = () => {
       </div>
     ))
   )
-
-
 }
-
         </div>
       </div>
     </section>

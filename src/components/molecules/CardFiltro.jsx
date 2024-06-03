@@ -146,7 +146,7 @@ const CardFiltro = ({recibirAnuncios}) => {
           <div className="ml-3 mr-5 w-11/12">
               <label className="block mb-1">Precio:</label>
               <RangeInput
-              minValue={10}
+              minValue={300}
               maxValue={1500}
               values={priceRange}
               onChange={handleSetPrecioRange}
@@ -157,7 +157,7 @@ const CardFiltro = ({recibirAnuncios}) => {
           <div className="ml-3 mr-5 w-11/12">
               <label className="block mb-1">Dimensiones:</label>
               <RangeInput
-              minValue={5}
+              minValue={12}
               maxValue={300}
               values={dimensionRange}
               onChange={handleSetDimensionRange}
